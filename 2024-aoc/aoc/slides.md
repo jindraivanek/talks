@@ -60,6 +60,8 @@ image: https://preview.redd.it/2023-day-2-ai-art-lets-play-a-game-v0-8utwmpt1k14
 ---
 
 # Day 2: Cube Conundrum
+parsing with Regex active pattern
+
 <div class="imageText">
 The Elf explains that you've arrived at Snow Island and apologizes for the lack of snow. He'll be happy to explain the situation, but it's a bit of a walk, so you have some time. They don't get many visitors up here; would you like to play a game in the meantime?
 </div>
@@ -99,6 +101,15 @@ let parse line =
 
         int gameNumber, cubes
 
+```
+
+```
+SAMPLE:
+Game 1: 3 blue, 4 red; 1 red, 2 green, 6 blue; 2 green
+Game 2: 1 blue, 2 green; 3 green, 4 blue, 1 red; 1 green, 1 blue
+Game 3: 8 green, 6 blue, 20 red; 5 blue, 4 red, 13 green; 5 green, 1 red
+Game 4: 1 green, 3 red, 6 blue; 3 green, 6 red; 3 green, 15 blue, 14 red
+Game 5: 6 red, 1 blue, 3 green; 2 blue, 1 red, 2 green
 ```
 
 ---
@@ -164,6 +175,8 @@ image: https://i.redd.it/2023-day-8-ai-art-haunted-wasteland-v0-vrygjlhbe35c1.pn
 ---
 
 # Day 8: Haunted Wasteland
+infinite sequences and `Seq.scan`
+
 <div class="imageText">
 You're still riding a camel across Desert Island when you spot a sandstorm quickly approaching. When you turn to warn the Elf, she disappears before your eyes! To be fair, she had just finished warning you about ghosts a few minutes ago.
 </div>
@@ -192,7 +205,7 @@ Starting at AAA, follow the left/right instructions. How many steps are required
 
 ---
 
-```fsharp
+```fsharp {1-8|10-13|all}
 let instructions = lines[0]
 
 let paths =
@@ -201,11 +214,7 @@ let paths =
     |> Seq.collect (function
         | Match "(.*) = \((.*), (.*)\)" [ n; l; r ] -> [ (n, 'L'), l; (n, 'R'), r ])
     |> Map.ofSeq
-```
 
----
-
-```fsharp
 let instrCycle = Seq.initInfinite (fun i -> instructions.[i % instructions.Length])
 
 let makeSteps xs startNode =
@@ -238,7 +247,7 @@ XXX = (XXX, XXX)
 
 ---
 
-```fsharp
+```fsharp {1-15|17-26|all}
 let findEndCycles xs startNodes endCondition =
     startNodes
     |> List.map (fun n ->
@@ -254,11 +263,7 @@ let findEndCycles xs startNodes endCondition =
         let cycleLength = ends.[1] - offset
         assert (offset = cycleLength)
         cycleLength)
-```
 
----
-
-```fsharp
 let startNodes =
     paths
     |> Map.keys
@@ -269,7 +274,11 @@ let startNodes =
 
 let endIndexes =
     findEndCycles instrCycle startNodes (fun n -> n.EndsWith "Z") |> List.map int64
+```
 
+---
+
+```fsharp
 let firstStep = List.min endIndexes
 
 let gcd a b =
@@ -287,6 +296,7 @@ image: https://preview.redd.it/2023-day-14-ai-art-v0-x7kp3xev986c1.png?width=640
 ---
 
 # Day 14: Parabolic Reflector Dish
+Moving in grid with `Set`
 <div class="imageText">
 The dish is made up of many small mirrors, but while the mirrors themselves are roughly in the shape of a parabolic reflector dish, each individual mirror seems to be pointing in slightly the wrong direction. If the dish is meant to focus light, all it's doing right now is sending it in a vague direction.
 </div>
@@ -408,9 +418,22 @@ let rocks = indexed |> Seq.filter (snd >> (=) 'O') |> Seq.map fst |> set
 let cubes = indexed |> Seq.filter (snd >> (=) '#') |> Seq.map fst |> set
 ```
 
+```txt
+O....#....
+O.OO#....#
+.....##...
+OO.#O....O
+.O.....O#.
+O.#..O.#.#
+..O..#O..O
+.......O..
+#....###..
+#OO..#....
+```
+
 ---
 
-```fsharp
+```fsharp {1-12|14-22|all}
 let rec slideRock moveDir p rocks =
     let p2 = posPlus p moveDir
 
@@ -423,11 +446,7 @@ let rec slideRock moveDir p rocks =
         slideRock moveDir p2 rocks2
     else
         rocks
-```
 
----
-
-```fsharp
 let slideAllRocks moveDir rocks =
     let sortFun (x, y) =
         match moveDir with
@@ -455,7 +474,7 @@ let part1 () =
 
 ---
 
-```fsharp
+```fsharp {1-10|all}
 let rec slideAllRocksCycle visited dirs rocks =
     let i = Map.count visited
     let visited2 = Map.add rocks i visited
@@ -466,11 +485,7 @@ let rec slideAllRocksCycle visited dirs rocks =
     Map.tryFind rocks2 visited
     |> Option.map (fun j -> j, i - j + 1, visited2)
     |> Option.defaultWith (fun () -> slideAllRocksCycle visited2 dirs rocks2)
-```
 
----
-
-```fsharp
 let part2 () =
     let cycleCount = 1000000000
     let offset, cycleLen, history = slideAllRocksCycle Map.empty dirs rocks
@@ -488,6 +503,8 @@ image: https://i.redd.it/2023-day-13-ai-art-point-of-incidence-v0-7eu7bon6e26c1.
 ---
 
 # Day 13: Point of Incidence
+Grid based problem without indexes
+
 <div class="imageText">
 After a while, you make your way to a nearby cluster of mountains only to discover that the valley between them is completely full of large mirrors. Most of the mirrors seem to be aligned in a consistent way; perhaps you should head in that direction?
 </div>
@@ -567,6 +584,7 @@ In each pattern, fix the smudge and find the different line of reflection. What 
 
 ---
 
+<!-- 
 ```fsharp
 let chunkBy f xs =
     let rec go acc xs =
@@ -579,15 +597,16 @@ let chunkBy f xs =
             | ys :: acc -> go ((x :: ys) :: acc) xs
 
     go [] xs
+``` 
+-->
 
+```fsharp {1-2|7-9|4-5|7-21|all}
 let patterns =
     lines |> Seq.toList |> chunkBy ((<>) "") |> List.map (List.map Seq.toList)
 
-```
+let diffCount xs ys =
+    List.zip xs ys |> List.filter (fun (x, y) -> x <> y) |> List.length
 
----
-
-```fsharp
 let findReflectionWithDiffCount k pattern =
     let sumDiffs xs ys =
         List.zip xs ys |> List.sumBy (fun (x, y) -> diffCount x y)
@@ -607,7 +626,7 @@ let findReflectionWithDiffCount k pattern =
 
 ---
 
-```fsharp
+```fsharp {1-7|all}
 let patternScore k pattern =
     let rowReflect = findReflectionWithDiffCount k pattern |> Option.defaultValue 0L
 
@@ -626,6 +645,8 @@ image: https://i.redd.it/2023-day-12-ai-art-v0-w1sqox75cv5c1.png?s=40e2114b99144
 ---
 
 # Day 12 Hot Springs
+Easy dynamic programming with `memoizeRec`
+
 <div class="imageText">
 In the giant field just outside, the springs are arranged into rows. For each row, the condition records show every spring and whether it is operational (.) or damaged (#). This is the part of the condition records that is itself damaged; for some springs, it is simply unknown (?) whether the spring is operational or damaged.
 
@@ -652,7 +673,7 @@ For each row, count all of the different arrangements of operational and broken 
 
 ---
 
-```fsharp
+```fsharp {1-12,25-28|1-9,13-16,28|1-9,17-20,28|1-9,21-24,28|all}
 // ???.### 1,1,3
 // .??..??...?##. 1,1,3
 // ?#?#?#?#?#?#?#? 1,3,1,6
@@ -698,7 +719,14 @@ printfn $"{part1 ()}" // 7191
 
 To unfold the records, on each row, replace the list of spring conditions with five copies of itself (separated by ?) and replace the list of contiguous groups of damaged springs with five copies of itself (separated by ,).
 
-The first line of the above example would become:
+The first line of the above example 
+
+```txt
+???.### 1,1,3
+```
+
+would become:
+
 ```
 ???.###????.###????.###????.###????.### 1,1,3,1,1,3,1,1,3,1,1,3,1,1,3
 ```
