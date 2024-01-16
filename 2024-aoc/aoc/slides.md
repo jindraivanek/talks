@@ -26,11 +26,13 @@ css: unocss
 <style>
 h1 {
   color: white;
+  text-shadow: 2px 2px 4px #000000;
 }
 .imageText {
   font-size: 1.8rem;
-  background-color: rgba(0, 0, 0, 0.4);;
+  background-color: rgba(0, 0, 0, 0.2);;
   text-align: center;
+  text-shadow: 2px 2px 4px #000000;
 }
 </style>
 
