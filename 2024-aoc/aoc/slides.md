@@ -870,7 +870,20 @@ image: https://preview.redd.it/2023-day-25-ai-art-v0-llsh8q976obc1.jpg?width=640
 # Thank you!
 
 <div class="imageText">
-<b>Jindřich Ivánek</b> - jiv@ciklum.com - <a href="jindraivanek.hashnode.dev">https://jindraivanek.hashnode.dev</a>
+<b>Jindřich Ivánek</b> (jiv@ciklum.com) <br/> 
 </div>
+<div grid="~ cols-2 gap-4">
+<div class="imageText">
+Blog: <a href="jindraivanek.hashnode.dev">https://jindraivanek.hashnode.dev</a>
+<img src="img/qr-code-blog.png" width="200" height="200" />
+</div>
+<div class="imageText" style="text-align: right;">
+<br/>Slides<br/>
+<img src="img/qr-code-slides.png" width="200" height="200" style="float: right;"/>
+</div>
+</div>
+
+<br/>
+<br/>
 
 ## Questions?
