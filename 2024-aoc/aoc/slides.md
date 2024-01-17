@@ -746,12 +746,11 @@ let memoize f =
             let v = f x
             cache.Add(x, v)
             v
-
 ```
 
 ---
 
-```fsharp {1,3-5|all}
+```fsharp {1-5|all}
 let combNumMem xs gs =
     let rec recF =
         memoize // warning FS0040: This and other recursive references to the object(s) being defined will be checked for initialization-soundness at runtime through the use of a delayed reference. This is because you are defining one or more recursive objects, rather than recursive functions.
@@ -783,25 +782,48 @@ let combNumMem xs gs =
 ---
 
 ```fsharp
-let memoizeRec f =
-    let cache = System.Collections.Generic.Dictionary<_, _>()
+let part2 () =
+    parsed
+    |> Seq.map unfold
+    |> Seq.map (fun (xs, cs) -> combNumMem (Seq.toList xs) cs |> int64)
+    |> Seq.sum
 
-    let rec f' x =
-        match cache.TryGetValue x with
-        | true, v -> v
-        | _ ->
-            let v = f f' x
-            cache.Add(x, v)
-            v
-
-    f'
+printfn $"{part2 ()}" // 6512849198636
 ```
 
 ---
 
-```fsharp {1,3-5|all}
+```fsharp {monaco-diff}
+let memoize f =
+    let cache = System.Collections.Generic.Dictionary<_, _>()
+
+    fun x ->
+        match cache.TryGetValue x with
+        | true, v -> v
+        | _ ->
+            let v = f x
+            cache.Add(x, v)
+            v
+~~~
+let memoizeRec f =
+    let cache = System.Collections.Generic.Dictionary<_, _>()
+
+    let rec recF x =
+        match cache.TryGetValue x with
+        | true, v -> v
+        | _ ->
+            let v = f recF x
+            cache.Add(x, v)
+            v
+
+    recF
+```
+
+---
+
+```fsharp {1-5|all}
 let combNumMemRec xs gs =
-    let rec recF =
+    let recF =
         memoizeRec
         <| fun recF (xs, curG, gs) ->
             let recF x curG g = recF (x, curG, g)
