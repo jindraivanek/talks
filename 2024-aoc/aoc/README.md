@@ -9,3 +9,6 @@ To start the slide show:
 Edit the [slides.md](./slides.md) to see the changes.
 
 Learn more about Slidev on [documentations](https://sli.dev/).
+
+Export to PDF:
+`npx slidev export --drak true --output aoc-2023-fsharp.pdf`

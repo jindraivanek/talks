@@ -52,7 +52,13 @@ Solutions: https://github.com/jindraivanek/adventofcode/tree/main/2023/fsharp
 
 ### Day 13 - Grid based problem without indexes
 
-### Day 12 - Easy dynamic programming with `memoizeRec` 
+### Day 12 - Easy dynamic programming with `memoizeRec`
+
+---
+
+[adventofcode.com](https://adventofcode.com)
+
+<img src="img/aoc.png" width="600"/>
 
 ---
 layout: image
