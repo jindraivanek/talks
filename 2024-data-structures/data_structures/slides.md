@@ -41,7 +41,30 @@ h1 {
 
 ---
 
-# In this talk
+# Immutable Data Structures talks series
+1) **Basic Immutable Data Structures**
+   - why, how, structural sharing
+   - tuples, records, classes
+   - Linked list (F# list)
+   - Tree (F# Set, Map)
+2) **Immutable Data Structures in C#**
+   - ReadOnly vs. Immutable vs. Frozen
+   - ImmutableList, LinkedList
+   - ImmutableDictionary, ImmutableHashSet, ImmutableSortedSet
+   - benchmarks, notes
+3) **Working with Immutable Data Structures**
+   - F# List
+   - F# Map and Set
+   - C# builder pattern
+   - F# Seq, C# IEnumerable
+   - Lazy
+   - Structural comparison
+   - Referential transparency
+
+---
+
+# REMOVE In this talk
+TODO
 * Immutable Data Structures - why, how, Structural sharing
 * F# List
 * F# Map
@@ -50,7 +73,10 @@ h1 {
 * Comparison with C# collections
 * IEnumerable, seq - lazy sequences
 * referential transparency
-* ImmutableCollections
+
+---
+
+# **PART 1**
 
 ---
 
@@ -62,13 +88,15 @@ h1 {
 * immutable data structures are easier to reason about
   - value passed to a function, can't be changed
 * immutable data structures are thread-safe
-* bonus: memory efficient time travelling
+* bonus: memory efficient time traveling
 
 ---
 
 MYTH: to create new immutable value, you need to copy the whole thing
 
-![Alt text](img/meme.jpg)
+<Transform :scale="0.8">
+<img src ="img/meme.jpg"/>
+</Transform>
 
 ---
 
@@ -110,7 +138,7 @@ let listA = Cons(1, Cons(2, Cons(3, Nil)))
 
 ---
 
-## F# (Linked) list
+## F# (Linked) list sharing
 
 ```fsharp
 let listA = [1; 2; 3]
@@ -124,51 +152,7 @@ let listB2 = [4] @ listA
 
 ---
 
-## F# (Linked) list
 
-* fast iteration, mapping, filtering, append to start
-* slow indexing, append on end
-* `x :: xs` super fast
-* `xs @ ys` slow
-
----
-
-```fsharp
-    [<Benchmark>]
-    member _.ListAddToEnd() =
-        let rec go i acc =
-            if i = 0 then acc
-            else go (i - 1) (acc @ [i])
-        go size []
-
-    [<Benchmark>]
-    member _.ListAddToEndAcc() =
-        let rec go i acc =
-            if i = 0 then acc
-            else go (i - 1) (i :: acc)
-        go size [] |> List.rev
-```
-
----
-
-|          Method |        Mean |      Error |     StdDev |
-|---------------- |------------:|-----------:|-----------:|
-|    ListAddToEnd | 5,178.36 us | 102.125 us | 139.790 us |
-| ListAddToEndAcc |    15.99 us |   0.308 us |   0.303 us |
-
-* List.rev is fast!
-
----
-
-### search, indexing
-
-![Searching in list](img/list_search.gif)
-
-* `List.find`, `List.nth` goes through list one by one
-* `Set` is better for searching in big lists
-* if you really need indexing, use array
-
----
 
 ![bg](img/terminusdb-commit-graph-diagram-regtech-1536x864.png)
 
@@ -226,58 +210,6 @@ from https://visualgo.net/en/bst
 
 ---
 
-* values must be comparable
-* searching for item (`Set.exists`, `Set.contains`) by binary search
-* insert, remove - unchanged part of tree is shared
-![after insert](img/map_after_insert.png)
-* functions with predicate on value (`Set.map`, `Set.filter`, `Set.partition`), goes through whole tree! (in order)
-* keys cannot be duplicate - insert (`Set.add`) replace value if key already exists
-
----
-
-## When to use Set instead of List?
-
-* generally its faster to search for item with `Set`
-* but for small sizes `List.contains` is faster
-
----
-
-## When to use Set instead of List?
-
-<style scoped>
-table {
-  font-size: 22px;
-}
-</style>
-
-|       Method | Size |          Mean |       Error |      StdDev |
-|------------- |----- |--------------:|------------:|------------:|
-| **ListContains** |   **64** |      **2.159 μs** |   **0.0431 μs** |   **0.0998 μs** |
-|  SetContains |   64 |      4.561 μs |   0.0833 μs |   0.0780 μs |
-| **ListContains** |  **128** |      **8.241 μs** |   **0.0473 μs** |   **0.0443 μs** |
-|  SetContains |  128 |     10.347 μs |   0.1933 μs |   0.1985 μs |
-| **ListContains** |  **256** |     **31.169 μs** |   **0.1609 μs** |   **0.1426 μs** |
-|  SetContains |  256 |     23.488 μs |   0.3803 μs |   0.3557 μs |
-| **ListContains** |  **512** |    **119.456 μs** |   **0.5491 μs** |   **0.5136 μs** |
-|  SetContains |  512 |     52.889 μs |   0.8146 μs |   0.6802 μs |
-| **ListContains** | **1024** |    **467.593 μs** |   **1.9139 μs** |   **1.7902 μs** |
-|  SetContains | 1024 |    149.908 μs |   1.2287 μs |   1.1494 μs |
-| **ListContains** | **8192** | **29,487.104 μs** | **114.3813 μs** | **101.3960 μs** |
-|  SetContains | 8192 |  1,548.127 μs |  19.6668 μs |  18.3963 μs |
-
----
-
-## Another important functions
-* `Set.union`
-* `Set.intersect`
-* `Set.difference`
-
-* all of them work recursively on tree structure -> faster than the same on `list`
-
-* `Set.isSubset`
-* `Set.isSuperset`
-
-* try to find all elements of first set in second
 
 ---
 
@@ -340,7 +272,182 @@ Creation of `Map` - List.groupBy
 
 ---
 
-# F# data types
+# PART 2
+
+---
+
+# Comparison with C# collections
+
+<style scoped>
+table {
+  font-size: 30px;
+}
+</style>
+
+Collection | F# | C#
+--- | --- | ---
+Linked list | `list<'T>` | `LinkedList<T>`
+Resizable array | `ResizeArray<'T>` | `List<T>`
+Array | `array<'T>`, `'T[]` | `T[]`
+Map (immutable dictionary) | `Map<'K, 'V>` | `ImmutableDictionary<K, V>`
+Set (immutable set) | `Set<'T>` | `ImmutableHashSet<T>`
+Dictionary (mutable) | - | `Dictionary<K, V>`
+HashSet (mutable) | - | `HashSet<T>`
+Enumerable | `seq<'T>` | `IEnumerable<T>`
+
+---
+
+# Other useful C# collections
+
+* `Queue<T>`
+* `PriorityQueue<T>`
+* `ConcurrentDictionary<K, V>`
+
+---
+
+# C# Immutable collections
+
+---
+
+* Immutable collections are persistent data structures for C# from .NET 7
+* `ImmutableList<T>` is indexable, represented as tree (similar to `Map<int, T>`)
+* `ImmutableArray<T>` copying whole array on change (!)
+* `ImmutableDictionary<K, V>` is similar to `Map<K, V>`
+* `ImmutableStack<T>` is actually linked list - similar to `list<T>`
+* `ImmutableQueue<T>` - no std. F# equivalent\
+
+https://learn.microsoft.com/en-us/archive/msdn-magazine/2017/march/net-framework-immutable-collections
+
+---
+
+|                                     Method |       Mean |     Error |    StdDev |    Gen0 |   Gen1 | Allocated |
+|--- |-----------:|----------:|----------:|--------:|-------:|----------:|
+|                          **'int - List cons'** |   2.375 us | 0.0473 us | 0.1059 us |  2.5482 | 0.4234 |   32000 B |
+|                 'int - ImmutableList cons' |  95.410 us | 1.7462 us | 1.6334 us | 40.0391 | 9.6436 |  502896 B |
+|                       **'int - List.reverse'** |   2.511 us | 0.0413 us | 0.0606 us |  2.5482 | 0.4234 |   32000 B |
+|              'int - ImmutableList.reverse' |  71.121 us | 0.6854 us | 0.6411 us |  3.7842 | 0.8545 |   48024 B |
+|                           **'int - List.map'** |   2.781 us | 0.0543 us | 0.0687 us |  2.5482 | 0.5074 |   32000 B |
+|   'int - ImmutableList map by LINQ Select' |  31.375 us | 0.5986 us | 0.7571 us |  4.1504 | 0.9766 |   52200 B |
+|       'int - ImmutableList map by SetItem' | 113.180 us | 2.1415 us | 2.4661 us | 36.2549 |      - |  455376 B |
+|       'int - ImmutableList map by Builder' |  36.315 us | 0.6762 us | 0.6944 us |  3.7842 | 1.0376 |   48072 B |
+|                        **'int - List.filter'** |   1.756 us | 0.0350 us | 0.0623 us |  1.2741 | 0.1411 |   16000 B |
+| 'int - ImmutableList filter by LINQ Where' |  13.979 us | 0.2794 us | 0.3825 us |  2.2736 | 0.2747 |   28672 B |
+|  'int - ImmutableList filter by RemoveAll' |  57.953 us | 0.9039 us | 0.8455 us |  2.3804 | 0.2441 |   30376 B |
+|                        **'int - List.reduce'** |   1.095 us | 0.0148 us | 0.0138 us |       - |      - |         - |
+|               'int - ImmutableList.reduce' |   4.495 us | 0.0656 us | 0.0806 us |  0.0076 |      - |     112 B |
+|                      **'int - List.contains'** |   5.087 us | 0.0649 us | 0.0607 us |       - |      - |      40 B |
+|             'int - ImmutableList.contains' |  12.743 us | 0.1634 us | 0.1448 us |       - |      - |      72 B |
+
+---
+
+# PART 3
+
+## F# (Linked) list performance
+
+* fast iteration, mapping, filtering, append to start
+* slow indexing, append on end
+* `x :: xs` super fast
+* `xs @ ys` slow
+
+---
+
+```fsharp
+    [<Benchmark>]
+    member _.ListAddToEnd() =
+        let rec go i acc =
+            if i = 0 then acc
+            else go (i - 1) (acc @ [i])
+        go size []
+
+    [<Benchmark>]
+    member _.ListAddToEndAcc() =
+        let rec go i acc =
+            if i = 0 then acc
+            else go (i - 1) (i :: acc)
+        go size [] |> List.rev
+```
+
+---
+
+|          Method |        Mean |      Error |     StdDev |
+|---------------- |------------:|-----------:|-----------:|
+|    ListAddToEnd | 5,178.36 us | 102.125 us | 139.790 us |
+| ListAddToEndAcc |    15.99 us |   0.308 us |   0.303 us |
+
+* List.rev is fast!
+
+---
+
+# F# Set performance
+
+### search, indexing
+
+![Searching in list](img/list_search.gif)
+
+* `List.find`, `List.nth` goes through list one by one
+* `Set` is better for searching in big lists
+* if you really need indexing, use array
+
+---
+
+* values must be comparable
+* searching for item (`Set.exists`, `Set.contains`) by binary search
+* insert, remove - unchanged part of tree is shared
+![after insert](img/map_after_insert.png)
+* functions with predicate on value (`Set.map`, `Set.filter`, `Set.partition`), goes through whole tree! (in order)
+* keys cannot be duplicate - insert (`Set.add`) replace value if key already exists
+
+---
+
+## When to use Set instead of List?
+
+* generally its faster to search for item with `Set`
+* but for small sizes `List.contains` is faster
+
+---
+
+## When to use Set instead of List?
+
+<style scoped>
+table {
+  font-size: 22px;
+}
+</style>
+
+|       Method | Size |          Mean |       Error |      StdDev |
+|------------- |----- |--------------:|------------:|------------:|
+| **ListContains** |   **64** |      **2.159 μs** |   **0.0431 μs** |   **0.0998 μs** |
+|  SetContains |   64 |      4.561 μs |   0.0833 μs |   0.0780 μs |
+| **ListContains** |  **128** |      **8.241 μs** |   **0.0473 μs** |   **0.0443 μs** |
+|  SetContains |  128 |     10.347 μs |   0.1933 μs |   0.1985 μs |
+| **ListContains** |  **256** |     **31.169 μs** |   **0.1609 μs** |   **0.1426 μs** |
+|  SetContains |  256 |     23.488 μs |   0.3803 μs |   0.3557 μs |
+| **ListContains** |  **512** |    **119.456 μs** |   **0.5491 μs** |   **0.5136 μs** |
+|  SetContains |  512 |     52.889 μs |   0.8146 μs |   0.6802 μs |
+| **ListContains** | **1024** |    **467.593 μs** |   **1.9139 μs** |   **1.7902 μs** |
+|  SetContains | 1024 |    149.908 μs |   1.2287 μs |   1.1494 μs |
+| **ListContains** | **8192** | **29,487.104 μs** | **114.3813 μs** | **101.3960 μs** |
+|  SetContains | 8192 |  1,548.127 μs |  19.6668 μs |  18.3963 μs |
+
+---
+
+## Another important functions
+* `Set.union`
+* `Set.intersect`
+* `Set.difference`
+
+* all of them work recursively on tree structure -> faster than the same on `list`
+
+* `Set.isSubset`
+* `Set.isSuperset`
+
+* try to find all elements of first set in second
+
+---
+
+# Structural equality
+
+## F# data types
 * unit
 * primitive types - `int`, `float`, `string`, `bool`, ...
 * records
@@ -397,35 +504,6 @@ type PokerHand =
     | StraightFlush of int
     | RoyalFlush
 ```
-
----
-
-# Comparison with C# collections
-
-<style scoped>
-table {
-  font-size: 30px;
-}
-</style>
-
-Collection | F# | C#
---- | --- | ---
-Linked list | `list<'T>` | `LinkedList<T>`
-Resizable array | `ResizeArray<'T>` | `List<T>`
-Array | `array<'T>`, `'T[]` | `T[]`
-Map (immutable dictionary) | `Map<'K, 'V>` | `ImmutableDictionary<K, V>`
-Set (immutable set) | `Set<'T>` | `ImmutableHashSet<T>`
-Dictionary (mutable) | - | `Dictionary<K, V>`
-HashSet (mutable) | - | `HashSet<T>`
-Enumerable | `seq<'T>` | `IEnumerable<T>`
-
----
-
-# Other useful C# collections
-
-* `Queue<T>`
-* `PriorityQueue<T>`
-* `ConcurrentDictionary<K, V>`
 
 ---
 
@@ -538,41 +616,6 @@ let memoizeBy projection f =
 * no mutable variables / data structures, no side effects <=> **pure function**
 * every **pure** function is **referential transparent**
 * **pure function** is more strict, but can be checked by compiler - one of idea behind Haskell
-
----
-
-# C# Immutable collections
-
----
-
-* Immutable collections are persistent data structures for C# from .NET 7
-* `ImmutableList<T>` is indexable, represented as tree (similar to `Map<int, T>`)
-* `ImmutableArray<T>` copying whole array on change (!)
-* `ImmutableDictionary<K, V>` is similar to `Map<K, V>`
-* `ImmutableStack<T>` is actually linked list - similar to `list<T>`
-* `ImmutableQueue<T>` - no std. F# equivalent\
-
-https://learn.microsoft.com/en-us/archive/msdn-magazine/2017/march/net-framework-immutable-collections
-
----
-
-|                                     Method |       Mean |     Error |    StdDev |    Gen0 |   Gen1 | Allocated |
-|--- |-----------:|----------:|----------:|--------:|-------:|----------:|
-|                          **'int - List cons'** |   2.375 us | 0.0473 us | 0.1059 us |  2.5482 | 0.4234 |   32000 B |
-|                 'int - ImmutableList cons' |  95.410 us | 1.7462 us | 1.6334 us | 40.0391 | 9.6436 |  502896 B |
-|                       **'int - List.reverse'** |   2.511 us | 0.0413 us | 0.0606 us |  2.5482 | 0.4234 |   32000 B |
-|              'int - ImmutableList.reverse' |  71.121 us | 0.6854 us | 0.6411 us |  3.7842 | 0.8545 |   48024 B |
-|                           **'int - List.map'** |   2.781 us | 0.0543 us | 0.0687 us |  2.5482 | 0.5074 |   32000 B |
-|   'int - ImmutableList map by LINQ Select' |  31.375 us | 0.5986 us | 0.7571 us |  4.1504 | 0.9766 |   52200 B |
-|       'int - ImmutableList map by SetItem' | 113.180 us | 2.1415 us | 2.4661 us | 36.2549 |      - |  455376 B |
-|       'int - ImmutableList map by Builder' |  36.315 us | 0.6762 us | 0.6944 us |  3.7842 | 1.0376 |   48072 B |
-|                        **'int - List.filter'** |   1.756 us | 0.0350 us | 0.0623 us |  1.2741 | 0.1411 |   16000 B |
-| 'int - ImmutableList filter by LINQ Where' |  13.979 us | 0.2794 us | 0.3825 us |  2.2736 | 0.2747 |   28672 B |
-|  'int - ImmutableList filter by RemoveAll' |  57.953 us | 0.9039 us | 0.8455 us |  2.3804 | 0.2441 |   30376 B |
-|                        **'int - List.reduce'** |   1.095 us | 0.0148 us | 0.0138 us |       - |      - |         - |
-|               'int - ImmutableList.reduce' |   4.495 us | 0.0656 us | 0.0806 us |  0.0076 |      - |     112 B |
-|                      **'int - List.contains'** |   5.087 us | 0.0649 us | 0.0607 us |       - |      - |      40 B |
-|             'int - ImmutableList.contains' |  12.743 us | 0.1634 us | 0.1448 us |       - |      - |      72 B |
 
 ---
 
