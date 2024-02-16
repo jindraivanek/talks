@@ -126,25 +126,6 @@ let listA = 1 :: 2 :: 3 :: []
 
 ---
 
-F# list type definition
-```fsharp
-type List<'T> = 
-| ([]) : 'T list
-| ( :: ) : Head: 'T * Tail: 'T list -> 'T list
-```
-
-equivalently
-
-```fsharp
-type List<'T> = 
-| Nil : 'T list
-| Cons : Head: 'T * Tail: 'T list -> 'T list
-
-let listA = Cons(1, Cons(2, Cons(3, Nil)))
-```
-
----
-
 ## F# (Linked) list sharing
 
 ```fsharp
@@ -175,23 +156,6 @@ let s = [11; 20; 29; 32; 41; 50; 65; 72; 91; 99] |> set
 ```
 
 ![Example tree](img/set1.png)
-
----
-
-```fsharp
-    (* A classic functional language implementation of binary trees *)
-
-    [<CompilationRepresentation(CompilationRepresentationFlags.UseNullAsTrueValue)>]
-    [<NoEquality; NoComparison>]
-    type SetTree<'T> when 'T: comparison = 
-        | SetEmpty                                          // height = 0   
-        | SetNode of 'T * SetTree<'T> *  SetTree<'T> * int    // height = int 
-        | SetOne  of 'T                                     // height = 1   
-```
-
-```fsharp
-SetNode(41, SetNode(20, SetOne(11), SetNode(29, SetEmpty, SetOne(32), 1), 2), SetNode(65, SetOne(50), SetNode(91, SetOne(72), SetOne(99), 1), 2), 3)
-```
 
 ---
 
@@ -232,40 +196,14 @@ mapB = mapB2 // true
 
 ---
 
-```fsharp
-[<NoEquality; NoComparison>]
-[<AllowNullLiteral>]
-type internal MapTree<'Key, 'Value>(k: 'Key, v: 'Value, h: int) =
-    member _.Height = h
-    member _.Key = k
-    member _.Value = v
-    new(k: 'Key, v: 'Value) = MapTree(k, v, 1)
-
-[<NoEquality; NoComparison>]
-[<Sealed>]
-[<AllowNullLiteral>]
-type internal MapTreeNode<'Key, 'Value>
-    (
-        k: 'Key,
-        v: 'Value,
-        left: MapTree<'Key, 'Value>,
-        right: MapTree<'Key, 'Value>,
-        h: int
-    ) =
-    inherit MapTree<'Key, 'Value>(k, v, h)
-    member _.Left = left
-    member _.Right = right
-```
-
----
-
-# Structural equality
+# Structural comparison
 
 - definition of equality based on values, not references
-- all F# data types have defined structural equality and ordering
-- only few C# (compound) types have defined structural equality and ordering
+- all F# data types have defined structural comparison and ordering
+- only few C# (compound) types have defined structural comparison and ordering
   - Tuples, Records, Array, ImmutableArray
-- Immutability and structural equality are different features, but it is common that imm
+- Immutability and structural comparison are different features, but it is common that immutable data structures have defined structural comparison
+  - same value with different references are more common when working with immutable data structures
 
 ---
 
@@ -432,7 +370,31 @@ Seq.initInfinite (fun _ -> r.Next())
 
 # PART 3
 
-## F# (Linked) list performance
+---
+
+# F# list performance
+
+## F# list type definition
+
+```fsharp
+type List<'T> = 
+| ([]) : 'T list
+| ( :: ) : Head: 'T * Tail: 'T list -> 'T list
+```
+
+equivalently
+
+```fsharp
+type List<'T> = 
+| Nil : 'T list
+| Cons : Head: 'T * Tail: 'T list -> 'T list
+
+let listA = Cons(1, Cons(2, Cons(3, Nil)))
+```
+
+---
+
+## F# list performance
 
 * fast iteration, mapping, filtering, append to start
 * slow indexing, append on end
@@ -470,7 +432,26 @@ Seq.initInfinite (fun _ -> r.Next())
 
 # F# Set performance
 
-### search, indexing
+## F# Set type definition
+
+```fsharp
+    (* A classic functional language implementation of binary trees *)
+
+    [<CompilationRepresentation(CompilationRepresentationFlags.UseNullAsTrueValue)>]
+    [<NoEquality; NoComparison>]
+    type SetTree<'T> when 'T: comparison = 
+        | SetEmpty                                          // height = 0   
+        | SetNode of 'T * SetTree<'T> *  SetTree<'T> * int    // height = int 
+        | SetOne  of 'T                                     // height = 1   
+```
+
+```fsharp
+SetNode(41, SetNode(20, SetOne(11), SetNode(29, SetEmpty, SetOne(32), 1), 2), SetNode(65, SetOne(50), SetNode(91, SetOne(72), SetOne(99), 1), 2), 3)
+```
+
+---
+
+## search, indexing
 
 ![Searching in list](img/list_search.gif)
 
@@ -537,6 +518,37 @@ table {
 
 # F# Map performance
 
+## F# Map type definition
+
+```fsharp
+[<NoEquality; NoComparison>]
+[<AllowNullLiteral>]
+type internal MapTree<'Key, 'Value>(k: 'Key, v: 'Value, h: int) =
+    member _.Height = h
+    member _.Key = k
+    member _.Value = v
+    new(k: 'Key, v: 'Value) = MapTree(k, v, 1)
+
+[<NoEquality; NoComparison>]
+[<Sealed>]
+[<AllowNullLiteral>]
+type internal MapTreeNode<'Key, 'Value>
+    (
+        k: 'Key,
+        v: 'Value,
+        left: MapTree<'Key, 'Value>,
+        right: MapTree<'Key, 'Value>,
+        h: int
+    ) =
+    inherit MapTree<'Key, 'Value>(k, v, h)
+    member _.Left = left
+    member _.Right = right
+```
+
+---
+
+## F# Map performance
+
 * keys must be comparable
 * searching for item (`Map.find`, `Map.containsKey`) by binary search
 * insert, remove - unchanged part of tree is shared
@@ -545,6 +557,8 @@ table {
 * keys cannot be duplicate - insert (`Map.add`) replace value if key already exists
 
 ---
+
+## F# Map performance
 
 Creation of `Map` - List.groupBy
 
