@@ -61,9 +61,7 @@ h1 {
    - Structural comparison
    - Referential transparency
 
----
-
-# REMOVE In this talk
+#### REMOVE In this talk
 TODO
 * Immutable Data Structures - why, how, Structural sharing
 * F# List
@@ -105,6 +103,15 @@ MYTH: to create new immutable value, you need to copy the whole thing
 * **Structural sharing**
 
 ![Structural sharing](img/structural_sharing.png)
+
+---
+
+## Records
+
+- Immutable by default
+- No special immutable structure
+- Update syntax create new record with not-changed fields shared with old record
+  - only reference is copied (except for structs)
 
 ---
 
@@ -210,9 +217,6 @@ from https://visualgo.net/en/bst
 
 ---
 
-
----
-
 # F# Map
 * Dictionary like immutable data structure
 * Like `Set`, but with value linked with each key (node)
@@ -255,28 +259,57 @@ type internal MapTreeNode<'Key, 'Value>
 
 ---
 
-* keys must be comparable
-* searching for item (`Map.find`, `Map.containsKey`) by binary search
-* insert, remove - unchanged part of tree is shared
-![after insert](img/map_after_insert.png)
-* functions with predicate on key (`Map.pick`, `Map.findKey`), goes through whole tree! (in keys order)
-* keys cannot be duplicate - insert (`Map.add`) replace value if key already exists
+# Structural equality
+
+- definition of equality based on values, not references
+- all F# data types have defined structural equality and ordering
+- only few C# (compound) types have defined structural equality and ordering
+  - Tuples, Records, Array, ImmutableArray
+- Immutability and structural equality are different features, but it is common that imm
 
 ---
 
-Creation of `Map` - List.groupBy
-
-```fsharp
-[1..1000] |> List.groupBy (fun x -> x % 100) |> Map.ofList
-```
+# PART 2 - C# Immutable collections
 
 ---
 
-# PART 2
+# terminology
+
+- **Mutable** (a.k.a read/write): a collection or type that allows for in-place updates that anyone with a reference to that object may observe.
+- **Immutable**: a collection or type that cannot be changed at all, but can be efficiently mutated by allocating a new collection that shares much of the same memory with the original, but has new memory describing the change.
+- **Freezable**: a collection or type that is mutable until some point in time when it is frozen, after which it cannot be changed.
+- **Read only**: a reference whose type does not permit mutation of the underlying data, which is usually mutable by another reference.
+
+> source: https://devblogs.microsoft.com/premier-developer/read-only-frozen-and-immutable-collections/
 
 ---
 
-# Comparison with C# collections
+# ImmutableList
+TODO
+
+---
+
+# LinkedList
+TODO
+
+---
+
+# ImmutableDictionary
+TODO
+
+---
+
+# ImmutableHashSet
+TODO
+
+---
+
+# ImmutableSortedSet, ImmutableSortedDictionary
+TODO
+
+---
+
+# F# / C# naming
 
 <style scoped>
 table {
@@ -303,9 +336,7 @@ Enumerable | `seq<'T>` | `IEnumerable<T>`
 * `PriorityQueue<T>`
 * `ConcurrentDictionary<K, V>`
 
----
-
-# C# Immutable collections
+#### [REMOVE] C# Immutable collections
 
 ---
 
@@ -319,6 +350,8 @@ Enumerable | `seq<'T>` | `IEnumerable<T>`
 https://learn.microsoft.com/en-us/archive/msdn-magazine/2017/march/net-framework-immutable-collections
 
 ---
+
+# ImmutableList benchmarks
 
 |                                     Method |       Mean |     Error |    StdDev |    Gen0 |   Gen1 | Allocated |
 |--- |-----------:|----------:|----------:|--------:|-------:|----------:|
@@ -337,6 +370,63 @@ https://learn.microsoft.com/en-us/archive/msdn-magazine/2017/march/net-framework
 |               'int - ImmutableList.reduce' |   4.495 us | 0.0656 us | 0.0806 us |  0.0076 |      - |     112 B |
 |                      **'int - List.contains'** |   5.087 us | 0.0649 us | 0.0607 us |       - |      - |      40 B |
 |             'int - ImmutableList.contains' |  12.743 us | 0.1634 us | 0.1448 us |       - |      - |      72 B |
+
+---
+
+# Enumerable, seq - lazy sequences
+
+* Every collection implements `seq<'T>` (alias for `IEnumerable<T>`) interface.
+
+* Interface for reading elements one by one.
+
+* Lazy abstraction - elements are computed on demand.
+
+---
+
+## `seq<'t>`
+
+```fsharp
+xs |> Seq.map (fun x -> expensiveFun x) |> Seq.take 10 |> Seq.toList
+```
+
+Only first 10 elements are computed.
+
+```fsharp
+xs |> Seq.filter (...) |> Seq.map (fun x -> expensiveFun x) |> Seq.tryFind (...)
+```
+
+Only elements that pass the filter are computed.
+
+---
+
+## `seq<'t>`
+
+There are cases where using `Seq` can be faster than `List`.
+
+Example: expensive filtering and then taking first *k* elements.
+
+```fsharp
+xs |> Seq.filter (fun x -> expensiveFun x) |> Seq.take k |> Seq.toList
+```
+
+---
+
+## Infinite sequences
+
+Seq can be also used for generating (possible infinite) sequences.
+
+```fsharp
+let cycle xs =
+    let arr = Array.ofSeq xs
+    Seq.initInfinite (fun i -> arr.[i % arr.Length])
+```
+
+Or sequence of random numbers:
+
+```fsharp
+let r = System.Random()
+Seq.initInfinite (fun _ -> r.Next())
+```
 
 ---
 
@@ -445,6 +535,25 @@ table {
 
 ---
 
+# F# Map performance
+
+* keys must be comparable
+* searching for item (`Map.find`, `Map.containsKey`) by binary search
+* insert, remove - unchanged part of tree is shared
+![after insert](img/map_after_insert.png)
+* functions with predicate on key (`Map.pick`, `Map.findKey`), goes through whole tree! (in keys order)
+* keys cannot be duplicate - insert (`Map.add`) replace value if key already exists
+
+---
+
+Creation of `Map` - List.groupBy
+
+```fsharp
+[1..1000] |> List.groupBy (fun x -> x % 100) |> Map.ofList
+```
+
+---
+
 # Structural equality
 
 ## F# data types
@@ -507,62 +616,6 @@ type PokerHand =
 
 ---
 
-# Enumerable, seq - lazy sequences
-
-* Every collection implements `seq<'T>` (alias for `IEnumerable<T>`) interface.
-
-* Interface for reading elements one by one.
-
-* Lazy abstraction - elements are computed on demand.
-
----
-
-## `seq<'t>`
-
-```fsharp
-xs |> Seq.map (fun x -> expensiveFun x) |> Seq.take 10 |> Seq.toList
-```
-
-Only first 10 elements are computed.
-
-```fsharp
-xs |> Seq.filter (...) |> Seq.map (fun x -> expensiveFun x) |> Seq.tryFind (...)
-```
-
-Only elements that pass the filter are computed.
-
----
-
-## `seq<'t>`
-
-There are cases where using `Seq` can be faster than `List`.
-
-Example: expensive filtering and then taking first *k* elements.
-
-```fsharp
-xs |> Seq.filter (fun x -> expensiveFun x) |> Seq.take k |> Seq.toList
-```
-
----
-
-## Infinite sequences
-
-Seq can be also used for generating (possible infinite) sequences.
-
-```fsharp
-let cycle xs =
-    let arr = Array.ofSeq xs
-    Seq.initInfinite (fun i -> arr.[i % arr.Length])
-```
-
-Or sequence of random numbers:
-
-```fsharp
-let r = System.Random()
-Seq.initInfinite (fun _ -> r.Next())
-```
-
----
 
 # Referential transparency
 * replace the function call with its result doesn't change meaning of the program
