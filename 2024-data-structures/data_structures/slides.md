@@ -185,6 +185,8 @@ from https://visualgo.net/en/bst
 * Dictionary like immutable data structure
 * Like `Set`, but with value linked with each key (node)
 
+TODO image
+
 ---
 
 ```fsharp
@@ -222,27 +224,135 @@ mapB = mapB2 // true
 
 ---
 
+# ImmutableStack
+- Stack = LIFO (Last In First Out) collection
+- Linked list, F# list is actually immutable stack
+
+<img src ="img/ImmutableStack.png"/>
+
+> source: https://learn.microsoft.com/en-us/archive/msdn-magazine/2017/march/net-framework-immutable-collections
+
+---
+
+# ImmutableStack
+<div grid="~ cols-2 gap-4">
+<div>
+<img src ="img/ImmutableStack.png"/>
+</div>
+<div>
+```csharp
+var s1 = ImmutableStack<Int32>.Empty;
+var s2 = s1.Push(1);
+var s3 = s2.Push(2);
+var s4 = s3.Push(3);
+var s5 = s4.Push(4);
+var s6 = s4.Pop();
+var s7 = s6.Pop();
+```
+</div>
+</div>
+
+---
+
+# ImmutableStack
+<div grid="~ cols-2 gap-4">
+<div>
+```csharp
+var s1 = ImmutableStack<Int32>.Empty;
+var s2 = s1.Push(1);
+var s3 = s2.Push(2);
+var s4 = s3.Push(3);
+var s5 = s4.Push(4);
+var s6 = s4.Pop();
+var s7 = s6.Pop();
+```
+</div>
+<div>
+```fsharp
+let s1 = []
+let s2 = 1 :: s1
+let s3 = 2 :: s2
+let s4 = 3 :: s3
+let s5 = 4 :: s4
+let (_ :: s6) = s5 // same as let s6 = List.tail s5
+let (_ :: s7) = s6 // same as let s7 = List.tail s6
+```
+</div>
+</div>
+
+---
+
+# ImmutableStack benchmarks
+TODO
+
+---
+
 # ImmutableList
-TODO
+- Indexable, represented as (balanced binary) tree (similar to `Map<int, T>`)
+
+<Transform :scale="0.8">
+<img src ="img/ImmutableList.png"/>
+</Transform>
 
 ---
 
-# LinkedList
-TODO
+# ImmutableList
 
----
-
-# ImmutableDictionary
-TODO
+<div grid="~ cols-2 gap-4">
+<div>
+<Transform :scale="0.8">
+<img src ="img/ImmutableList.png"/>
+</Transform>
+</div>
+<div>
+```csharp
+var l1 = ImmutableList.Create<Int32>();
+var l2 = l1.Add(1);
+var l3 = l2.Add(2);
+var l4 = l3.Add(3);
+var l5 = l4.Replace(2, 4);
+```
+</div>
+</div>
 
 ---
 
 # ImmutableHashSet
+- Represented as balanced binary tree of hash buckets
+- hash as key, list of values with same hash as tree node value
+- similar to F# `Set<'T>`
+
+---
+
+# ImmutableDictionary
+- Same internal representation as `ImmutableHashSet`, but use hash of key.
+- similar to F# `Map<'K, 'V>`
+
+---
+
+# ImmutableHashSet, ImmutableDictionary benchmarks
 TODO
 
 ---
 
 # ImmutableSortedSet, ImmutableSortedDictionary
+- `ImmutableSortedSet` uses AVL tree, same as F# `Set`
+- `ImmutableSortedDictionary` uses AVL tree, same as F# `Map`
+
+---
+
+# ImmutableArray
+- immutable collection only by name - FrozenArray would be better
+- updating is slow - whole array is copied
+
+---
+
+# Builders
+- frozen flags
+
+---
+
+# C# Immutable collections - structural equality
 TODO
 
 ---
@@ -257,7 +367,7 @@ table {
 
 Collection | F# | C#
 --- | --- | ---
-Linked list | `list<'T>` | `LinkedList<T>`
+Linked list | `list<'T>` | `ImmutableStack<T>`
 Resizable array | `ResizeArray<'T>` | `List<T>`
 Array | `array<'T>`, `'T[]` | `T[]`
 Map (immutable dictionary) | `Map<'K, 'V>` | `ImmutableDictionary<K, V>`
