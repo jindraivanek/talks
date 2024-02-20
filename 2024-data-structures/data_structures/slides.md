@@ -353,7 +353,27 @@ TODO
 ---
 
 # C# Immutable collections - structural equality
-TODO
+- Only Immutable Array implements `IStructuralEquatable` and `IStructuralComparable` (TODO)
+- Equals in other collections work sometimes as expected, sometimes not
+
+```csharp
+var s1 = ImmutableList.Create<int>();
+var s2 = ImmutableList.Create<int>();
+s1.Add(1);
+s2.Add(1);
+s1 == s2; // True
+```
+
+but
+
+```csharp
+var s1 = ImmutableList.Create<int>(0);
+var s2 = ImmutableList.Create<int>(0);
+s1.Add(1);
+s2.Add(1);
+s1 == s2; // False
+```
+
 
 ---
 
