@@ -12,10 +12,7 @@ highlighter: shiki
 lineNumbers: false
 # some information about the slides, markdown enabled
 info: |
-  ## Slidev Starter Template
-  Presentation slides for developers.
-
-  Learn more at [Sli.dev](https://sli.dev)
+  ## Immutable data structures presentation
 # persist drawings in exports and build
 drawings:
   persist: false
@@ -42,7 +39,7 @@ h1 {
 ---
 
 # Immutable Data Structures talks series
-1) **Basic Immutable Data Structures**
+1) **Immutable Data Structures introduction**
    - why, how, structural sharing
    - tuples, records, classes
    - Linked list (F# list)
@@ -108,10 +105,17 @@ MYTH: to create new immutable value, you need to copy the whole thing
 
 ## Records
 
+```fsharp
+{ Id: int; Name: string }
+```
+
 - Immutable by default
 - No special immutable structure
 - Update syntax create new record with not-changed fields shared with old record
-  - only reference is copied (except for structs)
+  - ```fsharp
+    { oldRecord with Name = "Bob" }
+    ```
+  - only reference is copied (except for *structs*)
 
 ---
 
@@ -213,7 +217,7 @@ mapB = mapB2 // true
 
 ---
 
-# terminology
+# Terminology
 
 - **Mutable** (a.k.a read/write): a collection or type that allows for in-place updates that anyone with a reference to that object may observe.
 - **Immutable**: a collection or type that cannot be changed at all, but can be efficiently mutated by allocating a new collection that shares much of the same memory with the original, but has new memory describing the change.
@@ -379,22 +383,22 @@ s1 == s2; // False
 
 # F# / C# naming
 
-<style scoped>
+<style>
 table {
-  font-size: 30px;
+  font-size: 18px;
 }
 </style>
 
-Collection | F# | C#
---- | --- | ---
-Linked list | `list<'T>` | `ImmutableStack<T>`
-Resizable array | `ResizeArray<'T>` | `List<T>`
-Array | `array<'T>`, `'T[]` | `T[]`
-Map (immutable dictionary) | `Map<'K, 'V>` | `ImmutableDictionary<K, V>`
-Set (immutable set) | `Set<'T>` | `ImmutableHashSet<T>`
-Dictionary (mutable) | - | `Dictionary<K, V>`
-HashSet (mutable) | - | `HashSet<T>`
-Enumerable | `seq<'T>` | `IEnumerable<T>`
+| Collection | F# | C# |
+| --- | --- | --- |
+| Linked list | `list<'T>` | `ImmutableStack<T>` |
+| Resizable array | `ResizeArray<'T>` | `List<T>` |
+| Array | `array<'T>`, `'T[]` | `T[]` |
+| Map (immutable dictionary) | `Map<'K, 'V>` | `ImmutableDictionary<K, V>` |
+| Set (immutable set) | `Set<'T>` | `ImmutableHashSet<T>` |
+| Dictionary (mutable) | - | `Dictionary<K, V>` |
+| HashSet (mutable) | - | `HashSet<T>` |
+| Enumerable | `seq<'T>` | `IEnumerable<T>` |
 
 ---
 
@@ -404,22 +408,15 @@ Enumerable | `seq<'T>` | `IEnumerable<T>`
 * `PriorityQueue<T>`
 * `ConcurrentDictionary<K, V>`
 
-#### [REMOVE] C# Immutable collections
-
----
-
-* Immutable collections are persistent data structures for C# from .NET 7
-* `ImmutableList<T>` is indexable, represented as tree (similar to `Map<int, T>`)
-* `ImmutableArray<T>` copying whole array on change (!)
-* `ImmutableDictionary<K, V>` is similar to `Map<K, V>`
-* `ImmutableStack<T>` is actually linked list - similar to `list<T>`
-* `ImmutableQueue<T>` - no std. F# equivalent\
-
-https://learn.microsoft.com/en-us/archive/msdn-magazine/2017/march/net-framework-immutable-collections
-
 ---
 
 # ImmutableList benchmarks
+
+<style>
+table {
+  font-size: 10px;
+}
+</style>
 
 |                                     Method |       Mean |     Error |    StdDev |    Gen0 |   Gen1 | Allocated |
 |--- |-----------:|----------:|----------:|--------:|-------:|----------:|
