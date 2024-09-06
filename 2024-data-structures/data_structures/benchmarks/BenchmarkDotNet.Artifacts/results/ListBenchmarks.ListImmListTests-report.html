@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<meta charset='utf-8' />
+<title>ListBenchmarks.ListImmListTests-20240321-172737</title>
+
+<style type="text/css">
+	table { border-collapse: collapse; display: block; width: 100%; overflow: auto; }
+	td, th { padding: 6px 13px; border: 1px solid #ddd; text-align: right; }
+	tr { background-color: #fff; border-top: 1px solid #ccc; }
+	tr:nth-child(even) { background: #f8f8f8; }
+</style>
+</head>
+<body>
+<pre><code>
+BenchmarkDotNet v0.13.12, Ubuntu 22.04.4 LTS (Jammy Jellyfish)
+12th Gen Intel Core i7-12800H, 1 CPU, 20 logical and 14 physical cores
+.NET SDK 8.0.101
+  [Host]     : .NET 8.0.1 (8.0.123.58001), X64 RyuJIT AVX2 DEBUG
+  DefaultJob : .NET 8.0.1 (8.0.123.58001), X64 RyuJIT AVX2
+</code></pre>
+<pre><code></code></pre>
+
+<table>
+<thead><tr><th>Method                              </th><th>Mean</th><th>Error</th><th>StdDev</th><th>Gen0</th><th>Gen1</th><th>Allocated</th>
+</tr>
+</thead><tbody><tr><td>&#39;int - List cons&#39;</td><td>3.126 &mu;s</td><td>0.0426 &mu;s</td><td>0.0378 &mu;s</td><td>2.5482</td><td>0.1450</td><td>32000 B</td>
+</tr><tr><td>&#39;int - ImmutableList cons&#39;</td><td>116.616 &mu;s</td><td>2.3127 &mu;s</td><td>2.4746 &mu;s</td><td>40.0391</td><td>3.6621</td><td>502896 B</td>
+</tr><tr><td>&#39;int - List.reverse&#39;</td><td>3.351 &mu;s</td><td>0.0656 &mu;s</td><td>0.0702 &mu;s</td><td>2.5482</td><td>0.1450</td><td>32000 B</td>
+</tr><tr><td>&#39;int - ImmutableList.reverse&#39;</td><td>80.645 &mu;s</td><td>0.4608 &mu;s</td><td>0.3848 &mu;s</td><td>3.7842</td><td>0.4883</td><td>48024 B</td>
+</tr><tr><td>&#39;int - List.map&#39;</td><td>3.875 &mu;s</td><td>0.0765 &mu;s</td><td>0.1847 &mu;s</td><td>2.5482</td><td>0.2747</td><td>32000 B</td>
+</tr><tr><td>&#39;int - ImmutableList map by LINQ Select&#39;</td><td>34.928 &mu;s</td><td>0.6706 &mu;s</td><td>0.7454 &mu;s</td><td>4.1504</td><td>0.3052</td><td>52200 B</td>
+</tr><tr><td>&#39;int - ImmutableList map by SetItem&#39;</td><td>132.245 &mu;s</td><td>1.9784 &mu;s</td><td>1.6521 &mu;s</td><td>36.1328</td><td>-</td><td>455376 B</td>
+</tr><tr><td>&#39;int - ImmutableList map by Builder&#39;</td><td>39.691 &mu;s</td><td>0.4538 &mu;s</td><td>0.4023 &mu;s</td><td>3.7842</td><td>0.5493</td><td>48072 B</td>
+</tr><tr><td>&#39;int - List.filter&#39;</td><td>1.975 &mu;s</td><td>0.0375 &mu;s</td><td>0.0447 &mu;s</td><td>1.2741</td><td>0.0725</td><td>16000 B</td>
+</tr><tr><td>&#39;int - ImmutableList filter by LINQ Where&#39;</td><td>14.810 &mu;s</td><td>0.1225 &mu;s</td><td>0.1146 &mu;s</td><td>2.2736</td><td>0.0916</td><td>28672 B</td>
+</tr><tr><td>&#39;int - ImmutableList filter by RemoveAll&#39;</td><td>59.245 &mu;s</td><td>0.3857 &mu;s</td><td>0.3608 &mu;s</td><td>2.3804</td><td>0.1221</td><td>30376 B</td>
+</tr><tr><td>&#39;int - List.reduce&#39;</td><td>1.073 &mu;s</td><td>0.0080 &mu;s</td><td>0.0071 &mu;s</td><td>-</td><td>-</td><td>-</td>
+</tr><tr><td>&#39;int - ImmutableList.reduce&#39;</td><td>4.564 &mu;s</td><td>0.0640 &mu;s</td><td>0.0599 &mu;s</td><td>0.0076</td><td>-</td><td>112 B</td>
+</tr><tr><td>&#39;int - List.contains&#39;</td><td>5.103 &mu;s</td><td>0.0164 &mu;s</td><td>0.0137 &mu;s</td><td>-</td><td>-</td><td>40 B</td>
+</tr><tr><td>&#39;int - ImmutableList.contains&#39;</td><td>13.902 &mu;s</td><td>0.0967 &mu;s</td><td>0.0904 &mu;s</td><td>-</td><td>-</td><td>72 B</td>
+</tr></tbody></table>
+</body>
+</html>

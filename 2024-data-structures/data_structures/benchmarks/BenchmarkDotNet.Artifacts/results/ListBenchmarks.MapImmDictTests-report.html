@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<meta charset='utf-8' />
+<title>ListBenchmarks.MapImmDictTests-20240621-145522</title>
+
+<style type="text/css">
+	table { border-collapse: collapse; display: block; width: 100%; overflow: auto; }
+	td, th { padding: 6px 13px; border: 1px solid #ddd; text-align: right; }
+	tr { background-color: #fff; border-top: 1px solid #ccc; }
+	tr:nth-child(even) { background: #f8f8f8; }
+</style>
+</head>
+<body>
+<pre><code>
+BenchmarkDotNet v0.13.12, Ubuntu 22.04.4 LTS (Jammy Jellyfish)
+12th Gen Intel Core i7-12800H, 1 CPU, 20 logical and 14 physical cores
+.NET SDK 8.0.204
+  [Host]     : .NET 8.0.4 (8.0.424.16909), X64 RyuJIT AVX2 DEBUG
+  DefaultJob : .NET 8.0.4 (8.0.424.16909), X64 RyuJIT AVX2
+</code></pre>
+<pre><code></code></pre>
+
+<table>
+<thead><tr><th>Method                           </th><th>Mean</th><th>Error</th><th>StdDev</th><th>Gen0</th><th>Gen1</th><th>Gen2</th><th>Allocated</th>
+</tr>
+</thead><tbody><tr><td>&#39;int - Map ofSeq&#39;</td><td>459.273 ms</td><td>9.0652 ms</td><td>10.4395 ms</td><td>82000.0000</td><td>8000.0000</td><td>-</td><td>1029666928 B</td>
+</tr><tr><td>&#39;int - ImmutableDictionary CreateRange&#39;</td><td>272.887 ms</td><td>5.3916 ms</td><td>13.0212 ms</td><td>7500.0000</td><td>7000.0000</td><td>500.0000</td><td>88001348 B</td>
+</tr><tr><td>&#39;int - ToFrozenDictionary&#39;</td><td>86.633 ms</td><td>1.6625 ms</td><td>1.4738 ms</td><td>3142.8571</td><td>3000.0000</td><td>571.4286</td><td>117963226 B</td>
+</tr><tr><td>&#39;int - Dict AsReadOnly&#39;</td><td>68.672 ms</td><td>1.3543 ms</td><td>2.5103 ms</td><td>3000.0000</td><td>2857.1429</td><td>428.5714</td><td>85890579 B</td>
+</tr><tr><td>&#39;int - Map add&#39;</td><td>402.154 ms</td><td>7.9555 ms</td><td>11.6611 ms</td><td>80000.0000</td><td>6000.0000</td><td>-</td><td>1013666640 B</td>
+</tr><tr><td>&#39;int - ImmutableDictionary add&#39;</td><td>621.857 ms</td><td>12.2887 ms</td><td>10.8936 ms</td><td>92000.0000</td><td>9000.0000</td><td>-</td><td>1157280872 B</td>
+</tr><tr><td>&#39;int - Map find&#39;</td><td>48.168 ms</td><td>0.4956 ms</td><td>0.4139 ms</td><td>-</td><td>-</td><td>-</td><td>97 B</td>
+</tr><tr><td>&#39;int - ImmutableDictionary find&#39;</td><td>51.157 ms</td><td>0.8907 ms</td><td>0.7896 ms</td><td>-</td><td>-</td><td>-</td><td>97 B</td>
+</tr><tr><td>&#39;int - FrozenDictionary find&#39;</td><td>1.524 ms</td><td>0.0296 ms</td><td>0.0317 ms</td><td>-</td><td>-</td><td>-</td><td>2 B</td>
+</tr><tr><td>&#39;int - ReadOnlyDictionary find&#39;</td><td>2.333 ms</td><td>0.0442 ms</td><td>0.0454 ms</td><td>-</td><td>-</td><td>-</td><td>4 B</td>
+</tr></tbody></table>
+</body>
+</html>

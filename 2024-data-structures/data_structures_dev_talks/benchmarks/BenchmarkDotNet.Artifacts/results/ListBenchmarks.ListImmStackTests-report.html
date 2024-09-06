@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<meta charset='utf-8' />
+<title>ListBenchmarks.ListImmStackTests-20240322-110346</title>
+
+<style type="text/css">
+	table { border-collapse: collapse; display: block; width: 100%; overflow: auto; }
+	td, th { padding: 6px 13px; border: 1px solid #ddd; text-align: right; }
+	tr { background-color: #fff; border-top: 1px solid #ccc; }
+	tr:nth-child(even) { background: #f8f8f8; }
+</style>
+</head>
+<body>
+<pre><code>
+BenchmarkDotNet v0.13.12, Ubuntu 22.04.4 LTS (Jammy Jellyfish)
+12th Gen Intel Core i7-12800H, 1 CPU, 20 logical and 14 physical cores
+.NET SDK 8.0.101
+  [Host]     : .NET 8.0.1 (8.0.123.58001), X64 RyuJIT AVX2 DEBUG
+  DefaultJob : .NET 8.0.1 (8.0.123.58001), X64 RyuJIT AVX2
+</code></pre>
+<pre><code></code></pre>
+
+<table>
+<thead><tr><th>Method                                   </th><th>Mean</th><th>Error</th><th>StdDev</th><th>Gen0</th><th>Gen1</th><th>Allocated</th>
+</tr>
+</thead><tbody><tr><td>&#39;int - List cons&#39;</td><td>3.315 &mu;s</td><td>0.0653 &mu;s</td><td>0.1193 &mu;s</td><td>2.5482</td><td>0.1450</td><td>32000 B</td>
+</tr><tr><td>&#39;int - ImmutableStack cons&#39;</td><td>3.410 &mu;s</td><td>0.0679 &mu;s</td><td>0.0996 &mu;s</td><td>2.5482</td><td>0.1450</td><td>32000 B</td>
+</tr><tr><td>&#39;int - List.reverse&#39;</td><td>3.457 &mu;s</td><td>0.0682 &mu;s</td><td>0.1176 &mu;s</td><td>2.5482</td><td>0.1450</td><td>32000 B</td>
+</tr><tr><td>&#39;int - ImmutableStack reverse LINQ&#39;</td><td>7.030 &mu;s</td><td>0.1395 &mu;s</td><td>0.2973 &mu;s</td><td>3.2196</td><td>0.0458</td><td>40480 B</td>
+</tr><tr><td>&#39;int - ImmutableStack reverse Pop Push&#39;</td><td>3.653 &mu;s</td><td>0.0699 &mu;s</td><td>0.0777 &mu;s</td><td>2.5482</td><td>0.1450</td><td>32000 B</td>
+</tr><tr><td>&#39;int - List.map&#39;</td><td>3.628 &mu;s</td><td>0.0717 &mu;s</td><td>0.0636 &mu;s</td><td>2.5482</td><td>0.2747</td><td>32000 B</td>
+</tr><tr><td>&#39;int - ImmutableStack map by LINQ Select&#39;</td><td>8.332 &mu;s</td><td>0.1205 &mu;s</td><td>0.1127 &mu;s</td><td>2.5482</td><td>0.1373</td><td>32160 B</td>
+</tr><tr><td>&#39;int - ImmutableStack map manual&#39;</td><td>7.150 &mu;s</td><td>0.1206 &mu;s</td><td>0.1128 &mu;s</td><td>5.0964</td><td>0.4272</td><td>64000 B</td>
+</tr><tr><td>&#39;int - List.filter&#39;</td><td>1.961 &mu;s</td><td>0.0388 &mu;s</td><td>0.0363 &mu;s</td><td>1.2741</td><td>0.0725</td><td>16000 B</td>
+</tr><tr><td>&#39;int - ImmutableStack filter by LINQ Where&#39;</td><td>5.726 &mu;s</td><td>0.0502 &mu;s</td><td>0.0419 &mu;s</td><td>1.2817</td><td>0.0381</td><td>16160 B</td>
+</tr><tr><td>&#39;int - ImmutableStack filter manual&#39;</td><td>3.996 &mu;s</td><td>0.0785 &mu;s</td><td>0.1126 &mu;s</td><td>2.5482</td><td>0.1068</td><td>32000 B</td>
+</tr><tr><td>&#39;int - List.reduce&#39;</td><td>1.075 &mu;s</td><td>0.0057 &mu;s</td><td>0.0050 &mu;s</td><td>-</td><td>-</td><td>-</td>
+</tr><tr><td>&#39;int - ImmutableStack.reduce by LINQ Aggregate&#39;</td><td>3.056 &mu;s</td><td>0.0242 &mu;s</td><td>0.0202 &mu;s</td><td>0.0076</td><td>-</td><td>104 B</td>
+</tr><tr><td>&#39;int - ImmutableStack.reduce by Pop&#39;</td><td>1.075 &mu;s</td><td>0.0040 &mu;s</td><td>0.0036 &mu;s</td><td>-</td><td>-</td><td>-</td>
+</tr><tr><td>&#39;int - List.contains&#39;</td><td>5.162 &mu;s</td><td>0.0671 &mu;s</td><td>0.0595 &mu;s</td><td>-</td><td>-</td><td>40 B</td>
+</tr><tr><td>&#39;int - ImmutableStack.contains&#39;</td><td>12.626 &mu;s</td><td>0.0787 &mu;s</td><td>0.0657 &mu;s</td><td>0.3204</td><td>-</td><td>4040 B</td>
+</tr></tbody></table>
+</body>
+</html>

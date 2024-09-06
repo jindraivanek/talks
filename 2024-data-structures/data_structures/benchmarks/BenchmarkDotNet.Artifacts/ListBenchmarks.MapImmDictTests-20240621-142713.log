@@ -1,0 +1,848 @@
+// Validating benchmarks:
+// ***** BenchmarkRunner: Start   *****
+// ***** Found 7 benchmark(s) in total *****
+// ***** Building 1 exe(s) in Parallel: Start   *****
+// start dotnet  restore /p:UseSharedCompilation=false /p:BuildInParallel=false /m:1 /p:Deterministic=true /p:Optimize=true in /home/jiv/dev/posts/talks/2024-data-structures/data_structures/benchmarks/bin/release/net8.0/294e3d8f-f535-43a1-8e2a-4257c6409969
+// command took 0.9 sec and exited with 0
+// start dotnet  build -c Release --no-restore /p:UseSharedCompilation=false /p:BuildInParallel=false /m:1 /p:Deterministic=true /p:Optimize=true in /home/jiv/dev/posts/talks/2024-data-structures/data_structures/benchmarks/bin/release/net8.0/294e3d8f-f535-43a1-8e2a-4257c6409969
+// command took 3.05 sec and exited with 0
+// ***** Done, took 00:00:03 (3.98 sec)   *****
+// Found 7 benchmarks:
+//   MapImmDictTests.'int - Map ofSeq': DefaultJob
+//   MapImmDictTests.'int - ImmutableDictionary CreateRange': DefaultJob
+//   MapImmDictTests.'int - FrozenDictionary CreateRange': DefaultJob
+//   MapImmDictTests.'int - Map add': DefaultJob
+//   MapImmDictTests.'int - ImmutableDictionary add': DefaultJob
+//   MapImmDictTests.'int - Map find': DefaultJob
+//   MapImmDictTests.'int - ImmutableDictionary find': DefaultJob
+
+// **************************
+// Benchmark: MapImmDictTests.'int - Map ofSeq': DefaultJob
+// *** Execute ***
+// Launch: 1 / 1
+// Execute: dotnet 294e3d8f-f535-43a1-8e2a-4257c6409969.dll --anonymousPipes 112 113 --benchmarkName ListBenchmarks+MapImmDictTests.IntMapCreate --job Default --benchmarkId 0 in /home/jiv/dev/posts/talks/2024-data-structures/data_structures/benchmarks/bin/release/net8.0/294e3d8f-f535-43a1-8e2a-4257c6409969/bin/Release/net8.0
+// Failed to set up high priority (Permission denied). In order to run benchmarks with high priority, make sure you have the right permissions.
+// BeforeAnythingElse
+
+// Benchmark Process Environment Information:
+// BenchmarkDotNet v0.13.12
+// Runtime=.NET 8.0.4 (8.0.424.16909), X64 RyuJIT AVX2
+// GC=Concurrent Workstation
+// HardwareIntrinsics=AVX2,AES,BMI1,BMI2,FMA,LZCNT,PCLMUL,POPCNT,AvxVnni,SERIALIZE VectorSize=256
+// Job: DefaultJob
+
+OverheadJitting  1: 1 op, 200079.00 ns, 200.0790 us/op
+WorkloadJitting  1: 1 op, 526383703.00 ns, 526.3837 ms/op
+
+OverheadJitting  2: 1 op, 815.00 ns, 815.0000 ns/op
+WorkloadJitting  2: 1 op, 469617244.00 ns, 469.6172 ms/op
+
+WorkloadWarmup   1: 1 op, 435449424.00 ns, 435.4494 ms/op
+WorkloadWarmup   2: 1 op, 447912036.00 ns, 447.9120 ms/op
+WorkloadWarmup   3: 1 op, 435806382.00 ns, 435.8064 ms/op
+WorkloadWarmup   4: 1 op, 449780903.00 ns, 449.7809 ms/op
+WorkloadWarmup   5: 1 op, 445039883.00 ns, 445.0399 ms/op
+WorkloadWarmup   6: 1 op, 439710280.00 ns, 439.7103 ms/op
+
+// BeforeActualRun
+WorkloadActual   1: 1 op, 435085038.00 ns, 435.0850 ms/op
+WorkloadActual   2: 1 op, 437458186.00 ns, 437.4582 ms/op
+WorkloadActual   3: 1 op, 436123327.00 ns, 436.1233 ms/op
+WorkloadActual   4: 1 op, 435995413.00 ns, 435.9954 ms/op
+WorkloadActual   5: 1 op, 441126978.00 ns, 441.1270 ms/op
+WorkloadActual   6: 1 op, 452837395.00 ns, 452.8374 ms/op
+WorkloadActual   7: 1 op, 453384929.00 ns, 453.3849 ms/op
+WorkloadActual   8: 1 op, 436513643.00 ns, 436.5136 ms/op
+WorkloadActual   9: 1 op, 437224636.00 ns, 437.2246 ms/op
+WorkloadActual  10: 1 op, 433713320.00 ns, 433.7133 ms/op
+WorkloadActual  11: 1 op, 436091084.00 ns, 436.0911 ms/op
+WorkloadActual  12: 1 op, 436586929.00 ns, 436.5869 ms/op
+WorkloadActual  13: 1 op, 456820266.00 ns, 456.8203 ms/op
+WorkloadActual  14: 1 op, 441304345.00 ns, 441.3043 ms/op
+WorkloadActual  15: 1 op, 436828378.00 ns, 436.8284 ms/op
+
+// AfterActualRun
+WorkloadResult   1: 1 op, 435085038.00 ns, 435.0850 ms/op
+WorkloadResult   2: 1 op, 437458186.00 ns, 437.4582 ms/op
+WorkloadResult   3: 1 op, 436123327.00 ns, 436.1233 ms/op
+WorkloadResult   4: 1 op, 435995413.00 ns, 435.9954 ms/op
+WorkloadResult   5: 1 op, 441126978.00 ns, 441.1270 ms/op
+WorkloadResult   6: 1 op, 436513643.00 ns, 436.5136 ms/op
+WorkloadResult   7: 1 op, 437224636.00 ns, 437.2246 ms/op
+WorkloadResult   8: 1 op, 433713320.00 ns, 433.7133 ms/op
+WorkloadResult   9: 1 op, 436091084.00 ns, 436.0911 ms/op
+WorkloadResult  10: 1 op, 436586929.00 ns, 436.5869 ms/op
+WorkloadResult  11: 1 op, 441304345.00 ns, 441.3043 ms/op
+WorkloadResult  12: 1 op, 436828378.00 ns, 436.8284 ms/op
+// GC:  82 8 0 1029666592 1
+// Threading:  0 0 1
+
+// AfterAll
+// Benchmark Process 334842 has exited with code 0.
+
+Mean = 437.004 ms, StdErr = 0.636 ms (0.15%), N = 12, StdDev = 2.202 ms
+Min = 433.713 ms, Q1 = 436.067 ms, Median = 436.550 ms, Q3 = 437.283 ms, Max = 441.304 ms
+IQR = 1.216 ms, LowerFence = 434.243 ms, UpperFence = 439.107 ms
+ConfidenceInterval = [434.184 ms; 439.824 ms] (CI 99.9%), Margin = 2.820 ms (0.65% of Mean)
+Skewness = 0.81, Kurtosis = 2.71, MValue = 2
+
+// ** Remained 6 (85.7%) benchmark(s) to run. Estimated finish 2024-06-21 14:29 (0h 1m from now) **
+// **************************
+// Benchmark: MapImmDictTests.'int - ImmutableDictionary CreateRange': DefaultJob
+// *** Execute ***
+// Launch: 1 / 1
+// Execute: dotnet 294e3d8f-f535-43a1-8e2a-4257c6409969.dll --anonymousPipes 114 115 --benchmarkName ListBenchmarks+MapImmDictTests.IntImmDictCreate --job Default --benchmarkId 1 in /home/jiv/dev/posts/talks/2024-data-structures/data_structures/benchmarks/bin/release/net8.0/294e3d8f-f535-43a1-8e2a-4257c6409969/bin/Release/net8.0
+// Failed to set up high priority (Permission denied). In order to run benchmarks with high priority, make sure you have the right permissions.
+// BeforeAnythingElse
+
+// Benchmark Process Environment Information:
+// BenchmarkDotNet v0.13.12
+// Runtime=.NET 8.0.4 (8.0.424.16909), X64 RyuJIT AVX2
+// GC=Concurrent Workstation
+// HardwareIntrinsics=AVX2,AES,BMI1,BMI2,FMA,LZCNT,PCLMUL,POPCNT,AvxVnni,SERIALIZE VectorSize=256
+// Job: DefaultJob
+
+OverheadJitting  1: 1 op, 203674.00 ns, 203.6740 us/op
+WorkloadJitting  1: 1 op, 293465010.00 ns, 293.4650 ms/op
+
+WorkloadPilot    1: 2 op, 559247482.00 ns, 279.6237 ms/op
+
+WorkloadWarmup   1: 2 op, 542667705.00 ns, 271.3339 ms/op
+WorkloadWarmup   2: 2 op, 541866282.00 ns, 270.9331 ms/op
+WorkloadWarmup   3: 2 op, 541799217.00 ns, 270.8996 ms/op
+WorkloadWarmup   4: 2 op, 553732144.00 ns, 276.8661 ms/op
+WorkloadWarmup   5: 2 op, 553367680.00 ns, 276.6838 ms/op
+WorkloadWarmup   6: 2 op, 546989975.00 ns, 273.4950 ms/op
+WorkloadWarmup   7: 2 op, 554515514.00 ns, 277.2578 ms/op
+WorkloadWarmup   8: 2 op, 557494696.00 ns, 278.7473 ms/op
+WorkloadWarmup   9: 2 op, 548141349.00 ns, 274.0707 ms/op
+
+// BeforeActualRun
+WorkloadActual   1: 2 op, 558307798.00 ns, 279.1539 ms/op
+WorkloadActual   2: 2 op, 551358944.00 ns, 275.6795 ms/op
+WorkloadActual   3: 2 op, 550960002.00 ns, 275.4800 ms/op
+WorkloadActual   4: 2 op, 554314592.00 ns, 277.1573 ms/op
+WorkloadActual   5: 2 op, 563314799.00 ns, 281.6574 ms/op
+WorkloadActual   6: 2 op, 560195400.00 ns, 280.0977 ms/op
+WorkloadActual   7: 2 op, 547167423.00 ns, 273.5837 ms/op
+WorkloadActual   8: 2 op, 543606405.00 ns, 271.8032 ms/op
+WorkloadActual   9: 2 op, 548814738.00 ns, 274.4074 ms/op
+WorkloadActual  10: 2 op, 539370212.00 ns, 269.6851 ms/op
+WorkloadActual  11: 2 op, 548080465.00 ns, 274.0402 ms/op
+WorkloadActual  12: 2 op, 546565096.00 ns, 273.2825 ms/op
+WorkloadActual  13: 2 op, 604304443.00 ns, 302.1522 ms/op
+WorkloadActual  14: 2 op, 546341501.00 ns, 273.1708 ms/op
+WorkloadActual  15: 2 op, 552872222.00 ns, 276.4361 ms/op
+
+// AfterActualRun
+WorkloadResult   1: 2 op, 558307798.00 ns, 279.1539 ms/op
+WorkloadResult   2: 2 op, 551358944.00 ns, 275.6795 ms/op
+WorkloadResult   3: 2 op, 550960002.00 ns, 275.4800 ms/op
+WorkloadResult   4: 2 op, 554314592.00 ns, 277.1573 ms/op
+WorkloadResult   5: 2 op, 563314799.00 ns, 281.6574 ms/op
+WorkloadResult   6: 2 op, 560195400.00 ns, 280.0977 ms/op
+WorkloadResult   7: 2 op, 547167423.00 ns, 273.5837 ms/op
+WorkloadResult   8: 2 op, 543606405.00 ns, 271.8032 ms/op
+WorkloadResult   9: 2 op, 548814738.00 ns, 274.4074 ms/op
+WorkloadResult  10: 2 op, 539370212.00 ns, 269.6851 ms/op
+WorkloadResult  11: 2 op, 548080465.00 ns, 274.0402 ms/op
+WorkloadResult  12: 2 op, 546565096.00 ns, 273.2825 ms/op
+WorkloadResult  13: 2 op, 546341501.00 ns, 273.1708 ms/op
+WorkloadResult  14: 2 op, 552872222.00 ns, 276.4361 ms/op
+// GC:  15 14 1 176002024 2
+// Threading:  0 0 2
+
+// AfterAll
+// Benchmark Process 335133 has exited with code 0.
+
+Mean = 275.402 ms, StdErr = 0.879 ms (0.32%), N = 14, StdDev = 3.290 ms
+Min = 269.685 ms, Q1 = 273.358 ms, Median = 274.944 ms, Q3 = 276.977 ms, Max = 281.657 ms
+IQR = 3.619 ms, LowerFence = 267.929 ms, UpperFence = 282.406 ms
+ConfidenceInterval = [271.691 ms; 279.114 ms] (CI 99.9%), Margin = 3.712 ms (1.35% of Mean)
+Skewness = 0.29, Kurtosis = 2.15, MValue = 2
+
+// ** Remained 5 (71.4%) benchmark(s) to run. Estimated finish 2024-06-21 14:29 (0h 1m from now) **
+// **************************
+// Benchmark: MapImmDictTests.'int - FrozenDictionary CreateRange': DefaultJob
+// *** Execute ***
+// Launch: 1 / 1
+// Execute: dotnet 294e3d8f-f535-43a1-8e2a-4257c6409969.dll --anonymousPipes 114 115 --benchmarkName ListBenchmarks+MapImmDictTests.IntFrozenDictCreate --job Default --benchmarkId 2 in /home/jiv/dev/posts/talks/2024-data-structures/data_structures/benchmarks/bin/release/net8.0/294e3d8f-f535-43a1-8e2a-4257c6409969/bin/Release/net8.0
+// Failed to set up high priority (Permission denied). In order to run benchmarks with high priority, make sure you have the right permissions.
+// BeforeAnythingElse
+
+// Benchmark Process Environment Information:
+// BenchmarkDotNet v0.13.12
+// Runtime=.NET 8.0.4 (8.0.424.16909), X64 RyuJIT AVX2
+// GC=Concurrent Workstation
+// HardwareIntrinsics=AVX2,AES,BMI1,BMI2,FMA,LZCNT,PCLMUL,POPCNT,AvxVnni,SERIALIZE VectorSize=256
+// Job: DefaultJob
+
+OverheadJitting  1: 1 op, 217128.00 ns, 217.1280 us/op
+WorkloadJitting  1: 1 op, 97994995.00 ns, 97.9950 ms/op
+
+WorkloadPilot    1: 2 op, 169726927.00 ns, 84.8635 ms/op
+WorkloadPilot    2: 3 op, 294383917.00 ns, 98.1280 ms/op
+WorkloadPilot    3: 4 op, 418584429.00 ns, 104.6461 ms/op
+WorkloadPilot    4: 5 op, 483739673.00 ns, 96.7479 ms/op
+WorkloadPilot    5: 6 op, 580639001.00 ns, 96.7732 ms/op
+
+WorkloadWarmup   1: 6 op, 563207999.00 ns, 93.8680 ms/op
+WorkloadWarmup   2: 6 op, 577900351.00 ns, 96.3167 ms/op
+WorkloadWarmup   3: 6 op, 621875286.00 ns, 103.6459 ms/op
+WorkloadWarmup   4: 6 op, 681932303.00 ns, 113.6554 ms/op
+WorkloadWarmup   5: 6 op, 703893887.00 ns, 117.3156 ms/op
+WorkloadWarmup   6: 6 op, 609319057.00 ns, 101.5532 ms/op
+WorkloadWarmup   7: 6 op, 627590189.00 ns, 104.5984 ms/op
+WorkloadWarmup   8: 6 op, 589465668.00 ns, 98.2443 ms/op
+
+// BeforeActualRun
+WorkloadActual   1: 6 op, 565579825.00 ns, 94.2633 ms/op
+WorkloadActual   2: 6 op, 623753742.00 ns, 103.9590 ms/op
+WorkloadActual   3: 6 op, 597514530.00 ns, 99.5858 ms/op
+WorkloadActual   4: 6 op, 567314949.00 ns, 94.5525 ms/op
+WorkloadActual   5: 6 op, 585935308.00 ns, 97.6559 ms/op
+WorkloadActual   6: 6 op, 581887438.00 ns, 96.9812 ms/op
+WorkloadActual   7: 6 op, 573695322.00 ns, 95.6159 ms/op
+WorkloadActual   8: 6 op, 598411433.00 ns, 99.7352 ms/op
+WorkloadActual   9: 6 op, 582355821.00 ns, 97.0593 ms/op
+WorkloadActual  10: 6 op, 613193314.00 ns, 102.1989 ms/op
+WorkloadActual  11: 6 op, 621292756.00 ns, 103.5488 ms/op
+WorkloadActual  12: 6 op, 609513311.00 ns, 101.5856 ms/op
+WorkloadActual  13: 6 op, 602391612.00 ns, 100.3986 ms/op
+WorkloadActual  14: 6 op, 635873546.00 ns, 105.9789 ms/op
+WorkloadActual  15: 6 op, 640396325.00 ns, 106.7327 ms/op
+WorkloadActual  16: 6 op, 642601599.00 ns, 107.1003 ms/op
+WorkloadActual  17: 6 op, 636632673.00 ns, 106.1054 ms/op
+WorkloadActual  18: 6 op, 642156326.00 ns, 107.0261 ms/op
+WorkloadActual  19: 6 op, 618753833.00 ns, 103.1256 ms/op
+WorkloadActual  20: 6 op, 611646111.00 ns, 101.9410 ms/op
+WorkloadActual  21: 6 op, 611006148.00 ns, 101.8344 ms/op
+WorkloadActual  22: 6 op, 582366373.00 ns, 97.0611 ms/op
+WorkloadActual  23: 6 op, 587014491.00 ns, 97.8357 ms/op
+WorkloadActual  24: 6 op, 683250312.00 ns, 113.8751 ms/op
+WorkloadActual  25: 6 op, 588842470.00 ns, 98.1404 ms/op
+WorkloadActual  26: 6 op, 572653193.00 ns, 95.4422 ms/op
+WorkloadActual  27: 6 op, 594362672.00 ns, 99.0604 ms/op
+WorkloadActual  28: 6 op, 622904143.00 ns, 103.8174 ms/op
+WorkloadActual  29: 6 op, 634863534.00 ns, 105.8106 ms/op
+WorkloadActual  30: 6 op, 608573598.00 ns, 101.4289 ms/op
+WorkloadActual  31: 6 op, 549768909.00 ns, 91.6282 ms/op
+WorkloadActual  32: 6 op, 538975110.00 ns, 89.8292 ms/op
+WorkloadActual  33: 6 op, 565305465.00 ns, 94.2176 ms/op
+WorkloadActual  34: 6 op, 613529753.00 ns, 102.2550 ms/op
+WorkloadActual  35: 6 op, 573968715.00 ns, 95.6615 ms/op
+WorkloadActual  36: 6 op, 548058460.00 ns, 91.3431 ms/op
+WorkloadActual  37: 6 op, 639996503.00 ns, 106.6661 ms/op
+WorkloadActual  38: 6 op, 591473841.00 ns, 98.5790 ms/op
+WorkloadActual  39: 6 op, 608366932.00 ns, 101.3945 ms/op
+WorkloadActual  40: 6 op, 525342432.00 ns, 87.5571 ms/op
+WorkloadActual  41: 6 op, 615120076.00 ns, 102.5200 ms/op
+WorkloadActual  42: 6 op, 642936962.00 ns, 107.1562 ms/op
+WorkloadActual  43: 6 op, 587549196.00 ns, 97.9249 ms/op
+WorkloadActual  44: 6 op, 623966429.00 ns, 103.9944 ms/op
+WorkloadActual  45: 6 op, 642152040.00 ns, 107.0253 ms/op
+WorkloadActual  46: 6 op, 642753736.00 ns, 107.1256 ms/op
+WorkloadActual  47: 6 op, 629593363.00 ns, 104.9322 ms/op
+WorkloadActual  48: 6 op, 644858734.00 ns, 107.4765 ms/op
+WorkloadActual  49: 6 op, 636899243.00 ns, 106.1499 ms/op
+WorkloadActual  50: 6 op, 631607295.00 ns, 105.2679 ms/op
+WorkloadActual  51: 6 op, 590174425.00 ns, 98.3624 ms/op
+WorkloadActual  52: 6 op, 563501796.00 ns, 93.9170 ms/op
+WorkloadActual  53: 6 op, 623329682.00 ns, 103.8883 ms/op
+WorkloadActual  54: 6 op, 640622594.00 ns, 106.7704 ms/op
+WorkloadActual  55: 6 op, 567583812.00 ns, 94.5973 ms/op
+WorkloadActual  56: 6 op, 643581900.00 ns, 107.2636 ms/op
+WorkloadActual  57: 6 op, 640707724.00 ns, 106.7846 ms/op
+WorkloadActual  58: 6 op, 595592758.00 ns, 99.2655 ms/op
+WorkloadActual  59: 6 op, 604859640.00 ns, 100.8099 ms/op
+WorkloadActual  60: 6 op, 621892409.00 ns, 103.6487 ms/op
+WorkloadActual  61: 6 op, 625689578.00 ns, 104.2816 ms/op
+WorkloadActual  62: 6 op, 554966335.00 ns, 92.4944 ms/op
+WorkloadActual  63: 6 op, 623090046.00 ns, 103.8483 ms/op
+WorkloadActual  64: 6 op, 609468271.00 ns, 101.5780 ms/op
+WorkloadActual  65: 6 op, 579033064.00 ns, 96.5055 ms/op
+WorkloadActual  66: 6 op, 602746980.00 ns, 100.4578 ms/op
+WorkloadActual  67: 6 op, 608080223.00 ns, 101.3467 ms/op
+WorkloadActual  68: 6 op, 593383298.00 ns, 98.8972 ms/op
+WorkloadActual  69: 6 op, 589368213.00 ns, 98.2280 ms/op
+WorkloadActual  70: 6 op, 604141446.00 ns, 100.6902 ms/op
+WorkloadActual  71: 6 op, 571329785.00 ns, 95.2216 ms/op
+WorkloadActual  72: 6 op, 593863393.00 ns, 98.9772 ms/op
+WorkloadActual  73: 6 op, 609956001.00 ns, 101.6593 ms/op
+WorkloadActual  74: 6 op, 614632788.00 ns, 102.4388 ms/op
+
+// AfterActualRun
+WorkloadResult   1: 6 op, 565579825.00 ns, 94.2633 ms/op
+WorkloadResult   2: 6 op, 623753742.00 ns, 103.9590 ms/op
+WorkloadResult   3: 6 op, 597514530.00 ns, 99.5858 ms/op
+WorkloadResult   4: 6 op, 567314949.00 ns, 94.5525 ms/op
+WorkloadResult   5: 6 op, 585935308.00 ns, 97.6559 ms/op
+WorkloadResult   6: 6 op, 581887438.00 ns, 96.9812 ms/op
+WorkloadResult   7: 6 op, 573695322.00 ns, 95.6159 ms/op
+WorkloadResult   8: 6 op, 598411433.00 ns, 99.7352 ms/op
+WorkloadResult   9: 6 op, 582355821.00 ns, 97.0593 ms/op
+WorkloadResult  10: 6 op, 613193314.00 ns, 102.1989 ms/op
+WorkloadResult  11: 6 op, 621292756.00 ns, 103.5488 ms/op
+WorkloadResult  12: 6 op, 609513311.00 ns, 101.5856 ms/op
+WorkloadResult  13: 6 op, 602391612.00 ns, 100.3986 ms/op
+WorkloadResult  14: 6 op, 635873546.00 ns, 105.9789 ms/op
+WorkloadResult  15: 6 op, 640396325.00 ns, 106.7327 ms/op
+WorkloadResult  16: 6 op, 642601599.00 ns, 107.1003 ms/op
+WorkloadResult  17: 6 op, 636632673.00 ns, 106.1054 ms/op
+WorkloadResult  18: 6 op, 642156326.00 ns, 107.0261 ms/op
+WorkloadResult  19: 6 op, 618753833.00 ns, 103.1256 ms/op
+WorkloadResult  20: 6 op, 611646111.00 ns, 101.9410 ms/op
+WorkloadResult  21: 6 op, 611006148.00 ns, 101.8344 ms/op
+WorkloadResult  22: 6 op, 582366373.00 ns, 97.0611 ms/op
+WorkloadResult  23: 6 op, 587014491.00 ns, 97.8357 ms/op
+WorkloadResult  24: 6 op, 683250312.00 ns, 113.8751 ms/op
+WorkloadResult  25: 6 op, 588842470.00 ns, 98.1404 ms/op
+WorkloadResult  26: 6 op, 572653193.00 ns, 95.4422 ms/op
+WorkloadResult  27: 6 op, 594362672.00 ns, 99.0604 ms/op
+WorkloadResult  28: 6 op, 622904143.00 ns, 103.8174 ms/op
+WorkloadResult  29: 6 op, 634863534.00 ns, 105.8106 ms/op
+WorkloadResult  30: 6 op, 608573598.00 ns, 101.4289 ms/op
+WorkloadResult  31: 6 op, 549768909.00 ns, 91.6282 ms/op
+WorkloadResult  32: 6 op, 538975110.00 ns, 89.8292 ms/op
+WorkloadResult  33: 6 op, 565305465.00 ns, 94.2176 ms/op
+WorkloadResult  34: 6 op, 613529753.00 ns, 102.2550 ms/op
+WorkloadResult  35: 6 op, 573968715.00 ns, 95.6615 ms/op
+WorkloadResult  36: 6 op, 548058460.00 ns, 91.3431 ms/op
+WorkloadResult  37: 6 op, 639996503.00 ns, 106.6661 ms/op
+WorkloadResult  38: 6 op, 591473841.00 ns, 98.5790 ms/op
+WorkloadResult  39: 6 op, 608366932.00 ns, 101.3945 ms/op
+WorkloadResult  40: 6 op, 525342432.00 ns, 87.5571 ms/op
+WorkloadResult  41: 6 op, 615120076.00 ns, 102.5200 ms/op
+WorkloadResult  42: 6 op, 642936962.00 ns, 107.1562 ms/op
+WorkloadResult  43: 6 op, 587549196.00 ns, 97.9249 ms/op
+WorkloadResult  44: 6 op, 623966429.00 ns, 103.9944 ms/op
+WorkloadResult  45: 6 op, 642152040.00 ns, 107.0253 ms/op
+WorkloadResult  46: 6 op, 642753736.00 ns, 107.1256 ms/op
+WorkloadResult  47: 6 op, 629593363.00 ns, 104.9322 ms/op
+WorkloadResult  48: 6 op, 644858734.00 ns, 107.4765 ms/op
+WorkloadResult  49: 6 op, 636899243.00 ns, 106.1499 ms/op
+WorkloadResult  50: 6 op, 631607295.00 ns, 105.2679 ms/op
+WorkloadResult  51: 6 op, 590174425.00 ns, 98.3624 ms/op
+WorkloadResult  52: 6 op, 563501796.00 ns, 93.9170 ms/op
+WorkloadResult  53: 6 op, 623329682.00 ns, 103.8883 ms/op
+WorkloadResult  54: 6 op, 640622594.00 ns, 106.7704 ms/op
+WorkloadResult  55: 6 op, 567583812.00 ns, 94.5973 ms/op
+WorkloadResult  56: 6 op, 643581900.00 ns, 107.2636 ms/op
+WorkloadResult  57: 6 op, 640707724.00 ns, 106.7846 ms/op
+WorkloadResult  58: 6 op, 595592758.00 ns, 99.2655 ms/op
+WorkloadResult  59: 6 op, 604859640.00 ns, 100.8099 ms/op
+WorkloadResult  60: 6 op, 621892409.00 ns, 103.6487 ms/op
+WorkloadResult  61: 6 op, 625689578.00 ns, 104.2816 ms/op
+WorkloadResult  62: 6 op, 554966335.00 ns, 92.4944 ms/op
+WorkloadResult  63: 6 op, 623090046.00 ns, 103.8483 ms/op
+WorkloadResult  64: 6 op, 609468271.00 ns, 101.5780 ms/op
+WorkloadResult  65: 6 op, 579033064.00 ns, 96.5055 ms/op
+WorkloadResult  66: 6 op, 602746980.00 ns, 100.4578 ms/op
+WorkloadResult  67: 6 op, 608080223.00 ns, 101.3467 ms/op
+WorkloadResult  68: 6 op, 593383298.00 ns, 98.8972 ms/op
+WorkloadResult  69: 6 op, 589368213.00 ns, 98.2280 ms/op
+WorkloadResult  70: 6 op, 604141446.00 ns, 100.6902 ms/op
+WorkloadResult  71: 6 op, 571329785.00 ns, 95.2216 ms/op
+WorkloadResult  72: 6 op, 593863393.00 ns, 98.9772 ms/op
+WorkloadResult  73: 6 op, 609956001.00 ns, 101.6593 ms/op
+WorkloadResult  74: 6 op, 614632788.00 ns, 102.4388 ms/op
+// GC:  20 19 5 707781256 6
+// Threading:  0 0 6
+
+// AfterAll
+// Benchmark Process 335560 has exited with code 0.
+
+Mean = 100.812 ms, StdErr = 0.582 ms (0.58%), N = 74, StdDev = 5.004 ms
+Min = 87.557 ms, Q1 = 97.701 ms, Median = 101.412 ms, Q3 = 104.210 ms, Max = 113.875 ms
+IQR = 6.509 ms, LowerFence = 87.937 ms, UpperFence = 113.973 ms
+ConfidenceInterval = [98.817 ms; 102.807 ms] (CI 99.9%), Margin = 1.995 ms (1.98% of Mean)
+Skewness = -0.26, Kurtosis = 2.78, MValue = 2.08
+
+// ** Remained 4 (57.1%) benchmark(s) to run. Estimated finish 2024-06-21 14:31 (0h 2m from now) **
+// **************************
+// Benchmark: MapImmDictTests.'int - Map add': DefaultJob
+// *** Execute ***
+// Launch: 1 / 1
+// Execute: dotnet 294e3d8f-f535-43a1-8e2a-4257c6409969.dll --anonymousPipes 114 115 --benchmarkName ListBenchmarks+MapImmDictTests.IntMapCons --job Default --benchmarkId 3 in /home/jiv/dev/posts/talks/2024-data-structures/data_structures/benchmarks/bin/release/net8.0/294e3d8f-f535-43a1-8e2a-4257c6409969/bin/Release/net8.0
+// Failed to set up high priority (Permission denied). In order to run benchmarks with high priority, make sure you have the right permissions.
+// BeforeAnythingElse
+
+// Benchmark Process Environment Information:
+// BenchmarkDotNet v0.13.12
+// Runtime=.NET 8.0.4 (8.0.424.16909), X64 RyuJIT AVX2
+// GC=Concurrent Workstation
+// HardwareIntrinsics=AVX2,AES,BMI1,BMI2,FMA,LZCNT,PCLMUL,POPCNT,AvxVnni,SERIALIZE VectorSize=256
+// Job: DefaultJob
+
+OverheadJitting  1: 1 op, 218854.00 ns, 218.8540 us/op
+WorkloadJitting  1: 1 op, 409021212.00 ns, 409.0212 ms/op
+
+OverheadJitting  2: 1 op, 1108.00 ns, 1.1080 us/op
+WorkloadJitting  2: 1 op, 387827124.00 ns, 387.8271 ms/op
+
+WorkloadWarmup   1: 1 op, 383597574.00 ns, 383.5976 ms/op
+WorkloadWarmup   2: 1 op, 384489696.00 ns, 384.4897 ms/op
+WorkloadWarmup   3: 1 op, 382923957.00 ns, 382.9240 ms/op
+WorkloadWarmup   4: 1 op, 384736365.00 ns, 384.7364 ms/op
+WorkloadWarmup   5: 1 op, 388461791.00 ns, 388.4618 ms/op
+WorkloadWarmup   6: 1 op, 383013796.00 ns, 383.0138 ms/op
+
+// BeforeActualRun
+WorkloadActual   1: 1 op, 383422128.00 ns, 383.4221 ms/op
+WorkloadActual   2: 1 op, 395134834.00 ns, 395.1348 ms/op
+WorkloadActual   3: 1 op, 387264522.00 ns, 387.2645 ms/op
+WorkloadActual   4: 1 op, 386571866.00 ns, 386.5719 ms/op
+WorkloadActual   5: 1 op, 392337785.00 ns, 392.3378 ms/op
+WorkloadActual   6: 1 op, 386025762.00 ns, 386.0258 ms/op
+WorkloadActual   7: 1 op, 388293083.00 ns, 388.2931 ms/op
+WorkloadActual   8: 1 op, 437011675.00 ns, 437.0117 ms/op
+WorkloadActual   9: 1 op, 385161288.00 ns, 385.1613 ms/op
+WorkloadActual  10: 1 op, 387887970.00 ns, 387.8880 ms/op
+WorkloadActual  11: 1 op, 388825327.00 ns, 388.8253 ms/op
+WorkloadActual  12: 1 op, 385709925.00 ns, 385.7099 ms/op
+WorkloadActual  13: 1 op, 405540295.00 ns, 405.5403 ms/op
+WorkloadActual  14: 1 op, 385465524.00 ns, 385.4655 ms/op
+WorkloadActual  15: 1 op, 388302942.00 ns, 388.3029 ms/op
+
+// AfterActualRun
+WorkloadResult   1: 1 op, 383422128.00 ns, 383.4221 ms/op
+WorkloadResult   2: 1 op, 395134834.00 ns, 395.1348 ms/op
+WorkloadResult   3: 1 op, 387264522.00 ns, 387.2645 ms/op
+WorkloadResult   4: 1 op, 386571866.00 ns, 386.5719 ms/op
+WorkloadResult   5: 1 op, 392337785.00 ns, 392.3378 ms/op
+WorkloadResult   6: 1 op, 386025762.00 ns, 386.0258 ms/op
+WorkloadResult   7: 1 op, 388293083.00 ns, 388.2931 ms/op
+WorkloadResult   8: 1 op, 385161288.00 ns, 385.1613 ms/op
+WorkloadResult   9: 1 op, 387887970.00 ns, 387.8880 ms/op
+WorkloadResult  10: 1 op, 388825327.00 ns, 388.8253 ms/op
+WorkloadResult  11: 1 op, 385709925.00 ns, 385.7099 ms/op
+WorkloadResult  12: 1 op, 385465524.00 ns, 385.4655 ms/op
+WorkloadResult  13: 1 op, 388302942.00 ns, 388.3029 ms/op
+// GC:  80 6 0 1013666304 1
+// Threading:  0 0 1
+
+// AfterAll
+// Benchmark Process 336474 has exited with code 0.
+
+Mean = 387.723 ms, StdErr = 0.865 ms (0.22%), N = 13, StdDev = 3.119 ms
+Min = 383.422 ms, Q1 = 385.710 ms, Median = 387.265 ms, Q3 = 388.303 ms, Max = 395.135 ms
+IQR = 2.593 ms, LowerFence = 381.820 ms, UpperFence = 392.192 ms
+ConfidenceInterval = [383.988 ms; 391.459 ms] (CI 99.9%), Margin = 3.735 ms (0.96% of Mean)
+Skewness = 0.97, Kurtosis = 3.18, MValue = 2
+
+// ** Remained 3 (42.9%) benchmark(s) to run. Estimated finish 2024-06-21 14:30 (0h 1m from now) **
+// **************************
+// Benchmark: MapImmDictTests.'int - ImmutableDictionary add': DefaultJob
+// *** Execute ***
+// Launch: 1 / 1
+// Execute: dotnet 294e3d8f-f535-43a1-8e2a-4257c6409969.dll --anonymousPipes 114 115 --benchmarkName ListBenchmarks+MapImmDictTests.IntImmDictCons --job Default --benchmarkId 4 in /home/jiv/dev/posts/talks/2024-data-structures/data_structures/benchmarks/bin/release/net8.0/294e3d8f-f535-43a1-8e2a-4257c6409969/bin/Release/net8.0
+// Failed to set up high priority (Permission denied). In order to run benchmarks with high priority, make sure you have the right permissions.
+// BeforeAnythingElse
+
+// Benchmark Process Environment Information:
+// BenchmarkDotNet v0.13.12
+// Runtime=.NET 8.0.4 (8.0.424.16909), X64 RyuJIT AVX2
+// GC=Concurrent Workstation
+// HardwareIntrinsics=AVX2,AES,BMI1,BMI2,FMA,LZCNT,PCLMUL,POPCNT,AvxVnni,SERIALIZE VectorSize=256
+// Job: DefaultJob
+
+OverheadJitting  1: 1 op, 203375.00 ns, 203.3750 us/op
+WorkloadJitting  1: 1 op, 657440112.00 ns, 657.4401 ms/op
+
+OverheadJitting  2: 1 op, 895.00 ns, 895.0000 ns/op
+WorkloadJitting  2: 1 op, 609223184.00 ns, 609.2232 ms/op
+
+WorkloadWarmup   1: 1 op, 619286148.00 ns, 619.2861 ms/op
+WorkloadWarmup   2: 1 op, 612653984.00 ns, 612.6540 ms/op
+WorkloadWarmup   3: 1 op, 619750779.00 ns, 619.7508 ms/op
+WorkloadWarmup   4: 1 op, 642055278.00 ns, 642.0553 ms/op
+WorkloadWarmup   5: 1 op, 613035473.00 ns, 613.0355 ms/op
+WorkloadWarmup   6: 1 op, 619251620.00 ns, 619.2516 ms/op
+WorkloadWarmup   7: 1 op, 711743335.00 ns, 711.7433 ms/op
+WorkloadWarmup   8: 1 op, 631136109.00 ns, 631.1361 ms/op
+
+// BeforeActualRun
+WorkloadActual   1: 1 op, 604499413.00 ns, 604.4994 ms/op
+WorkloadActual   2: 1 op, 605068158.00 ns, 605.0682 ms/op
+WorkloadActual   3: 1 op, 629220882.00 ns, 629.2209 ms/op
+WorkloadActual   4: 1 op, 621903803.00 ns, 621.9038 ms/op
+WorkloadActual   5: 1 op, 636708025.00 ns, 636.7080 ms/op
+WorkloadActual   6: 1 op, 623298337.00 ns, 623.2983 ms/op
+WorkloadActual   7: 1 op, 624719891.00 ns, 624.7199 ms/op
+WorkloadActual   8: 1 op, 608759693.00 ns, 608.7597 ms/op
+WorkloadActual   9: 1 op, 617016306.00 ns, 617.0163 ms/op
+WorkloadActual  10: 1 op, 615081113.00 ns, 615.0811 ms/op
+WorkloadActual  11: 1 op, 653950215.00 ns, 653.9502 ms/op
+WorkloadActual  12: 1 op, 615098771.00 ns, 615.0988 ms/op
+WorkloadActual  13: 1 op, 618683340.00 ns, 618.6833 ms/op
+WorkloadActual  14: 1 op, 611688190.00 ns, 611.6882 ms/op
+WorkloadActual  15: 1 op, 606436402.00 ns, 606.4364 ms/op
+
+// AfterActualRun
+WorkloadResult   1: 1 op, 604499413.00 ns, 604.4994 ms/op
+WorkloadResult   2: 1 op, 605068158.00 ns, 605.0682 ms/op
+WorkloadResult   3: 1 op, 629220882.00 ns, 629.2209 ms/op
+WorkloadResult   4: 1 op, 621903803.00 ns, 621.9038 ms/op
+WorkloadResult   5: 1 op, 636708025.00 ns, 636.7080 ms/op
+WorkloadResult   6: 1 op, 623298337.00 ns, 623.2983 ms/op
+WorkloadResult   7: 1 op, 624719891.00 ns, 624.7199 ms/op
+WorkloadResult   8: 1 op, 608759693.00 ns, 608.7597 ms/op
+WorkloadResult   9: 1 op, 617016306.00 ns, 617.0163 ms/op
+WorkloadResult  10: 1 op, 615081113.00 ns, 615.0811 ms/op
+WorkloadResult  11: 1 op, 615098771.00 ns, 615.0988 ms/op
+WorkloadResult  12: 1 op, 618683340.00 ns, 618.6833 ms/op
+WorkloadResult  13: 1 op, 611688190.00 ns, 611.6882 ms/op
+WorkloadResult  14: 1 op, 606436402.00 ns, 606.4364 ms/op
+// GC:  92 9 0 1157280536 1
+// Threading:  0 0 1
+
+// AfterAll
+// Benchmark Process 336680 has exited with code 0.
+
+Mean = 617.013 ms, StdErr = 2.544 ms (0.41%), N = 14, StdDev = 9.517 ms
+Min = 604.499 ms, Q1 = 609.492 ms, Median = 616.058 ms, Q3 = 622.950 ms, Max = 636.708 ms
+IQR = 13.458 ms, LowerFence = 589.305 ms, UpperFence = 643.137 ms
+ConfidenceInterval = [606.277 ms; 627.749 ms] (CI 99.9%), Margin = 10.736 ms (1.74% of Mean)
+Skewness = 0.39, Kurtosis = 2.1, MValue = 2
+
+// ** Remained 2 (28.6%) benchmark(s) to run. Estimated finish 2024-06-21 14:30 (0h 0m from now) **
+// **************************
+// Benchmark: MapImmDictTests.'int - Map find': DefaultJob
+// *** Execute ***
+// Launch: 1 / 1
+// Execute: dotnet 294e3d8f-f535-43a1-8e2a-4257c6409969.dll --anonymousPipes 114 115 --benchmarkName ListBenchmarks+MapImmDictTests.IntMapFind --job Default --benchmarkId 5 in /home/jiv/dev/posts/talks/2024-data-structures/data_structures/benchmarks/bin/release/net8.0/294e3d8f-f535-43a1-8e2a-4257c6409969/bin/Release/net8.0
+// Failed to set up high priority (Permission denied). In order to run benchmarks with high priority, make sure you have the right permissions.
+// BeforeAnythingElse
+
+// Benchmark Process Environment Information:
+// BenchmarkDotNet v0.13.12
+// Runtime=.NET 8.0.4 (8.0.424.16909), X64 RyuJIT AVX2
+// GC=Concurrent Workstation
+// HardwareIntrinsics=AVX2,AES,BMI1,BMI2,FMA,LZCNT,PCLMUL,POPCNT,AvxVnni,SERIALIZE VectorSize=256
+// Job: DefaultJob
+
+OverheadJitting  1: 1 op, 147926.00 ns, 147.9260 us/op
+WorkloadJitting  1: 1 op, 224875274.00 ns, 224.8753 ms/op
+
+WorkloadPilot    1: 2 op, 94247540.00 ns, 47.1238 ms/op
+WorkloadPilot    2: 3 op, 143592228.00 ns, 47.8641 ms/op
+WorkloadPilot    3: 4 op, 191150334.00 ns, 47.7876 ms/op
+WorkloadPilot    4: 5 op, 235432035.00 ns, 47.0864 ms/op
+WorkloadPilot    5: 6 op, 283271171.00 ns, 47.2119 ms/op
+WorkloadPilot    6: 7 op, 332862903.00 ns, 47.5518 ms/op
+WorkloadPilot    7: 8 op, 390602291.00 ns, 48.8253 ms/op
+WorkloadPilot    8: 9 op, 428202038.00 ns, 47.5780 ms/op
+WorkloadPilot    9: 10 op, 511196139.00 ns, 51.1196 ms/op
+
+WorkloadWarmup   1: 10 op, 496251686.00 ns, 49.6252 ms/op
+WorkloadWarmup   2: 10 op, 495338011.00 ns, 49.5338 ms/op
+WorkloadWarmup   3: 10 op, 473197495.00 ns, 47.3197 ms/op
+WorkloadWarmup   4: 10 op, 490304781.00 ns, 49.0305 ms/op
+WorkloadWarmup   5: 10 op, 487706263.00 ns, 48.7706 ms/op
+WorkloadWarmup   6: 10 op, 483663509.00 ns, 48.3664 ms/op
+WorkloadWarmup   7: 10 op, 498788281.00 ns, 49.8788 ms/op
+WorkloadWarmup   8: 10 op, 482194182.00 ns, 48.2194 ms/op
+
+// BeforeActualRun
+WorkloadActual   1: 10 op, 479903410.00 ns, 47.9903 ms/op
+WorkloadActual   2: 10 op, 512138481.00 ns, 51.2138 ms/op
+WorkloadActual   3: 10 op, 487743576.00 ns, 48.7744 ms/op
+WorkloadActual   4: 10 op, 482947428.00 ns, 48.2947 ms/op
+WorkloadActual   5: 10 op, 469648526.00 ns, 46.9649 ms/op
+WorkloadActual   6: 10 op, 477400472.00 ns, 47.7400 ms/op
+WorkloadActual   7: 10 op, 493441152.00 ns, 49.3441 ms/op
+WorkloadActual   8: 10 op, 474291371.00 ns, 47.4291 ms/op
+WorkloadActual   9: 10 op, 512047153.00 ns, 51.2047 ms/op
+WorkloadActual  10: 10 op, 482431996.00 ns, 48.2432 ms/op
+WorkloadActual  11: 10 op, 507026037.00 ns, 50.7026 ms/op
+WorkloadActual  12: 10 op, 574351502.00 ns, 57.4352 ms/op
+WorkloadActual  13: 10 op, 526329065.00 ns, 52.6329 ms/op
+WorkloadActual  14: 10 op, 472222241.00 ns, 47.2222 ms/op
+WorkloadActual  15: 10 op, 468652502.00 ns, 46.8653 ms/op
+WorkloadActual  16: 10 op, 475611590.00 ns, 47.5612 ms/op
+WorkloadActual  17: 10 op, 470154508.00 ns, 47.0155 ms/op
+WorkloadActual  18: 10 op, 470381616.00 ns, 47.0382 ms/op
+WorkloadActual  19: 10 op, 480100481.00 ns, 48.0100 ms/op
+WorkloadActual  20: 10 op, 479737313.00 ns, 47.9737 ms/op
+WorkloadActual  21: 10 op, 476659111.00 ns, 47.6659 ms/op
+WorkloadActual  22: 10 op, 472286280.00 ns, 47.2286 ms/op
+WorkloadActual  23: 10 op, 514476223.00 ns, 51.4476 ms/op
+WorkloadActual  24: 10 op, 521456252.00 ns, 52.1456 ms/op
+WorkloadActual  25: 10 op, 483106388.00 ns, 48.3106 ms/op
+WorkloadActual  26: 10 op, 468693559.00 ns, 46.8694 ms/op
+WorkloadActual  27: 10 op, 474801352.00 ns, 47.4801 ms/op
+WorkloadActual  28: 10 op, 488854843.00 ns, 48.8855 ms/op
+WorkloadActual  29: 10 op, 487121594.00 ns, 48.7122 ms/op
+WorkloadActual  30: 10 op, 481954089.00 ns, 48.1954 ms/op
+WorkloadActual  31: 10 op, 474104801.00 ns, 47.4105 ms/op
+
+// AfterActualRun
+WorkloadResult   1: 10 op, 479903410.00 ns, 47.9903 ms/op
+WorkloadResult   2: 10 op, 512138481.00 ns, 51.2138 ms/op
+WorkloadResult   3: 10 op, 487743576.00 ns, 48.7744 ms/op
+WorkloadResult   4: 10 op, 482947428.00 ns, 48.2947 ms/op
+WorkloadResult   5: 10 op, 469648526.00 ns, 46.9649 ms/op
+WorkloadResult   6: 10 op, 477400472.00 ns, 47.7400 ms/op
+WorkloadResult   7: 10 op, 493441152.00 ns, 49.3441 ms/op
+WorkloadResult   8: 10 op, 474291371.00 ns, 47.4291 ms/op
+WorkloadResult   9: 10 op, 512047153.00 ns, 51.2047 ms/op
+WorkloadResult  10: 10 op, 482431996.00 ns, 48.2432 ms/op
+WorkloadResult  11: 10 op, 507026037.00 ns, 50.7026 ms/op
+WorkloadResult  12: 10 op, 472222241.00 ns, 47.2222 ms/op
+WorkloadResult  13: 10 op, 468652502.00 ns, 46.8653 ms/op
+WorkloadResult  14: 10 op, 475611590.00 ns, 47.5612 ms/op
+WorkloadResult  15: 10 op, 470154508.00 ns, 47.0155 ms/op
+WorkloadResult  16: 10 op, 470381616.00 ns, 47.0382 ms/op
+WorkloadResult  17: 10 op, 480100481.00 ns, 48.0100 ms/op
+WorkloadResult  18: 10 op, 479737313.00 ns, 47.9737 ms/op
+WorkloadResult  19: 10 op, 476659111.00 ns, 47.6659 ms/op
+WorkloadResult  20: 10 op, 472286280.00 ns, 47.2286 ms/op
+WorkloadResult  21: 10 op, 514476223.00 ns, 51.4476 ms/op
+WorkloadResult  22: 10 op, 483106388.00 ns, 48.3106 ms/op
+WorkloadResult  23: 10 op, 468693559.00 ns, 46.8694 ms/op
+WorkloadResult  24: 10 op, 474801352.00 ns, 47.4801 ms/op
+WorkloadResult  25: 10 op, 488854843.00 ns, 48.8855 ms/op
+WorkloadResult  26: 10 op, 487121594.00 ns, 48.7122 ms/op
+WorkloadResult  27: 10 op, 481954089.00 ns, 48.1954 ms/op
+WorkloadResult  28: 10 op, 474104801.00 ns, 47.4105 ms/op
+// GC:  0 0 0 736 10
+// Threading:  0 0 10
+
+// AfterAll
+// Benchmark Process 337110 has exited with code 0.
+
+Mean = 48.278 ms, StdErr = 0.256 ms (0.53%), N = 28, StdDev = 1.356 ms
+Min = 46.865 ms, Q1 = 47.365 ms, Median = 47.982 ms, Q3 = 48.728 ms, Max = 51.448 ms
+IQR = 1.363 ms, LowerFence = 45.321 ms, UpperFence = 50.772 ms
+ConfidenceInterval = [47.333 ms; 49.224 ms] (CI 99.9%), Margin = 0.945 ms (1.96% of Mean)
+Skewness = 1.16, Kurtosis = 3.22, MValue = 2
+
+// ** Remained 1 (14.3%) benchmark(s) to run. Estimated finish 2024-06-21 14:30 (0h 0m from now) **
+// **************************
+// Benchmark: MapImmDictTests.'int - ImmutableDictionary find': DefaultJob
+// *** Execute ***
+// Launch: 1 / 1
+// Execute: dotnet 294e3d8f-f535-43a1-8e2a-4257c6409969.dll --anonymousPipes 114 115 --benchmarkName ListBenchmarks+MapImmDictTests.IntImmDictFind --job Default --benchmarkId 6 in /home/jiv/dev/posts/talks/2024-data-structures/data_structures/benchmarks/bin/release/net8.0/294e3d8f-f535-43a1-8e2a-4257c6409969/bin/Release/net8.0
+// Failed to set up high priority (Permission denied). In order to run benchmarks with high priority, make sure you have the right permissions.
+// BeforeAnythingElse
+
+// Benchmark Process Environment Information:
+// BenchmarkDotNet v0.13.12
+// Runtime=.NET 8.0.4 (8.0.424.16909), X64 RyuJIT AVX2
+// GC=Concurrent Workstation
+// HardwareIntrinsics=AVX2,AES,BMI1,BMI2,FMA,LZCNT,PCLMUL,POPCNT,AvxVnni,SERIALIZE VectorSize=256
+// Job: DefaultJob
+
+OverheadJitting  1: 1 op, 170219.00 ns, 170.2190 us/op
+WorkloadJitting  1: 1 op, 60438000.00 ns, 60.4380 ms/op
+
+WorkloadPilot    1: 2 op, 111067727.00 ns, 55.5339 ms/op
+WorkloadPilot    2: 3 op, 156300903.00 ns, 52.1003 ms/op
+WorkloadPilot    3: 4 op, 188111743.00 ns, 47.0279 ms/op
+WorkloadPilot    4: 5 op, 236884817.00 ns, 47.3770 ms/op
+WorkloadPilot    5: 6 op, 275658625.00 ns, 45.9431 ms/op
+WorkloadPilot    6: 7 op, 335625735.00 ns, 47.9465 ms/op
+WorkloadPilot    7: 8 op, 376023903.00 ns, 47.0030 ms/op
+WorkloadPilot    8: 9 op, 405817132.00 ns, 45.0908 ms/op
+WorkloadPilot    9: 10 op, 438968112.00 ns, 43.8968 ms/op
+WorkloadPilot   10: 11 op, 486630943.00 ns, 44.2392 ms/op
+WorkloadPilot   11: 12 op, 551950360.00 ns, 45.9959 ms/op
+
+WorkloadWarmup   1: 12 op, 549841048.00 ns, 45.8201 ms/op
+WorkloadWarmup   2: 12 op, 575536189.00 ns, 47.9613 ms/op
+WorkloadWarmup   3: 12 op, 558923565.00 ns, 46.5770 ms/op
+WorkloadWarmup   4: 12 op, 559642402.00 ns, 46.6369 ms/op
+WorkloadWarmup   5: 12 op, 552346091.00 ns, 46.0288 ms/op
+WorkloadWarmup   6: 12 op, 561294475.00 ns, 46.7745 ms/op
+
+// BeforeActualRun
+WorkloadActual   1: 12 op, 557455474.00 ns, 46.4546 ms/op
+WorkloadActual   2: 12 op, 558265207.00 ns, 46.5221 ms/op
+WorkloadActual   3: 12 op, 578188016.00 ns, 48.1823 ms/op
+WorkloadActual   4: 12 op, 567486432.00 ns, 47.2905 ms/op
+WorkloadActual   5: 12 op, 573604814.00 ns, 47.8004 ms/op
+WorkloadActual   6: 12 op, 568839475.00 ns, 47.4033 ms/op
+WorkloadActual   7: 12 op, 555791597.00 ns, 46.3160 ms/op
+WorkloadActual   8: 12 op, 577400342.00 ns, 48.1167 ms/op
+WorkloadActual   9: 12 op, 571355634.00 ns, 47.6130 ms/op
+WorkloadActual  10: 12 op, 552860572.00 ns, 46.0717 ms/op
+WorkloadActual  11: 12 op, 568128700.00 ns, 47.3441 ms/op
+WorkloadActual  12: 12 op, 648323892.00 ns, 54.0270 ms/op
+WorkloadActual  13: 12 op, 575206030.00 ns, 47.9338 ms/op
+WorkloadActual  14: 12 op, 570190930.00 ns, 47.5159 ms/op
+WorkloadActual  15: 12 op, 555414296.00 ns, 46.2845 ms/op
+
+// AfterActualRun
+WorkloadResult   1: 12 op, 557455474.00 ns, 46.4546 ms/op
+WorkloadResult   2: 12 op, 558265207.00 ns, 46.5221 ms/op
+WorkloadResult   3: 12 op, 578188016.00 ns, 48.1823 ms/op
+WorkloadResult   4: 12 op, 567486432.00 ns, 47.2905 ms/op
+WorkloadResult   5: 12 op, 573604814.00 ns, 47.8004 ms/op
+WorkloadResult   6: 12 op, 568839475.00 ns, 47.4033 ms/op
+WorkloadResult   7: 12 op, 555791597.00 ns, 46.3160 ms/op
+WorkloadResult   8: 12 op, 577400342.00 ns, 48.1167 ms/op
+WorkloadResult   9: 12 op, 571355634.00 ns, 47.6130 ms/op
+WorkloadResult  10: 12 op, 552860572.00 ns, 46.0717 ms/op
+WorkloadResult  11: 12 op, 568128700.00 ns, 47.3441 ms/op
+WorkloadResult  12: 12 op, 575206030.00 ns, 47.9338 ms/op
+WorkloadResult  13: 12 op, 570190930.00 ns, 47.5159 ms/op
+WorkloadResult  14: 12 op, 555414296.00 ns, 46.2845 ms/op
+// GC:  0 0 0 736 12
+// Threading:  0 0 12
+
+// AfterAll
+// Benchmark Process 337942 has exited with code 0.
+
+Mean = 47.203 ms, StdErr = 0.195 ms (0.41%), N = 14, StdDev = 0.731 ms
+Min = 46.072 ms, Q1 = 46.471 ms, Median = 47.374 ms, Q3 = 47.754 ms, Max = 48.182 ms
+IQR = 1.282 ms, LowerFence = 44.548 ms, UpperFence = 49.677 ms
+ConfidenceInterval = [46.379 ms; 48.028 ms] (CI 99.9%), Margin = 0.825 ms (1.75% of Mean)
+Skewness = -0.23, Kurtosis = 1.39, MValue = 2
+
+// ** Remained 0 (0.0%) benchmark(s) to run. Estimated finish 2024-06-21 14:30 (0h 0m from now) **
+// ***** BenchmarkRunner: Finish  *****
+
+// * Export *
+  BenchmarkDotNet.Artifacts/results/ListBenchmarks.MapImmDictTests-report.csv
+  BenchmarkDotNet.Artifacts/results/ListBenchmarks.MapImmDictTests-report-github.md
+  BenchmarkDotNet.Artifacts/results/ListBenchmarks.MapImmDictTests-report.html
+
+// * Detailed results *
+MapImmDictTests.'int - Map ofSeq': DefaultJob
+Runtime = .NET 8.0.4 (8.0.424.16909), X64 RyuJIT AVX2; GC = Concurrent Workstation
+Mean = 437.004 ms, StdErr = 0.636 ms (0.15%), N = 12, StdDev = 2.202 ms
+Min = 433.713 ms, Q1 = 436.067 ms, Median = 436.550 ms, Q3 = 437.283 ms, Max = 441.304 ms
+IQR = 1.216 ms, LowerFence = 434.243 ms, UpperFence = 439.107 ms
+ConfidenceInterval = [434.184 ms; 439.824 ms] (CI 99.9%), Margin = 2.820 ms (0.65% of Mean)
+Skewness = 0.81, Kurtosis = 2.71, MValue = 2
+-------------------- Histogram --------------------
+[432.451 ms ; 442.567 ms) | @@@@@@@@@@@@
+---------------------------------------------------
+
+MapImmDictTests.'int - ImmutableDictionary CreateRange': DefaultJob
+Runtime = .NET 8.0.4 (8.0.424.16909), X64 RyuJIT AVX2; GC = Concurrent Workstation
+Mean = 275.402 ms, StdErr = 0.879 ms (0.32%), N = 14, StdDev = 3.290 ms
+Min = 269.685 ms, Q1 = 273.358 ms, Median = 274.944 ms, Q3 = 276.977 ms, Max = 281.657 ms
+IQR = 3.619 ms, LowerFence = 267.929 ms, UpperFence = 282.406 ms
+ConfidenceInterval = [271.691 ms; 279.114 ms] (CI 99.9%), Margin = 3.712 ms (1.35% of Mean)
+Skewness = 0.29, Kurtosis = 2.15, MValue = 2
+-------------------- Histogram --------------------
+[267.893 ms ; 277.551 ms) | @@@@@@@@@@@
+[277.551 ms ; 283.449 ms) | @@@
+---------------------------------------------------
+
+MapImmDictTests.'int - FrozenDictionary CreateRange': DefaultJob
+Runtime = .NET 8.0.4 (8.0.424.16909), X64 RyuJIT AVX2; GC = Concurrent Workstation
+Mean = 100.812 ms, StdErr = 0.582 ms (0.58%), N = 74, StdDev = 5.004 ms
+Min = 87.557 ms, Q1 = 97.701 ms, Median = 101.412 ms, Q3 = 104.210 ms, Max = 113.875 ms
+IQR = 6.509 ms, LowerFence = 87.937 ms, UpperFence = 113.973 ms
+ConfidenceInterval = [98.817 ms; 102.807 ms] (CI 99.9%), Margin = 1.995 ms (1.98% of Mean)
+Skewness = -0.26, Kurtosis = 2.78, MValue = 2.08
+-------------------- Histogram --------------------
+[ 85.993 ms ;  89.597 ms) | @
+[ 89.597 ms ;  93.647 ms) | @@@@
+[ 93.647 ms ;  96.794 ms) | @@@@@@@@@@
+[ 96.794 ms ;  99.923 ms) | @@@@@@@@@@@@@@@@
+[ 99.923 ms ; 104.379 ms) | @@@@@@@@@@@@@@@@@@@@@@@@@
+[104.379 ms ; 107.769 ms) | @@@@@@@@@@@@@@@@@
+[107.769 ms ; 112.311 ms) | 
+[112.311 ms ; 115.440 ms) | @
+---------------------------------------------------
+
+MapImmDictTests.'int - Map add': DefaultJob
+Runtime = .NET 8.0.4 (8.0.424.16909), X64 RyuJIT AVX2; GC = Concurrent Workstation
+Mean = 387.723 ms, StdErr = 0.865 ms (0.22%), N = 13, StdDev = 3.119 ms
+Min = 383.422 ms, Q1 = 385.710 ms, Median = 387.265 ms, Q3 = 388.303 ms, Max = 395.135 ms
+IQR = 2.593 ms, LowerFence = 381.820 ms, UpperFence = 392.192 ms
+ConfidenceInterval = [383.988 ms; 391.459 ms] (CI 99.9%), Margin = 3.735 ms (0.96% of Mean)
+Skewness = 0.97, Kurtosis = 3.18, MValue = 2
+-------------------- Histogram --------------------
+[382.865 ms ; 396.876 ms) | @@@@@@@@@@@@@
+---------------------------------------------------
+
+MapImmDictTests.'int - ImmutableDictionary add': DefaultJob
+Runtime = .NET 8.0.4 (8.0.424.16909), X64 RyuJIT AVX2; GC = Concurrent Workstation
+Mean = 617.013 ms, StdErr = 2.544 ms (0.41%), N = 14, StdDev = 9.517 ms
+Min = 604.499 ms, Q1 = 609.492 ms, Median = 616.058 ms, Q3 = 622.950 ms, Max = 636.708 ms
+IQR = 13.458 ms, LowerFence = 589.305 ms, UpperFence = 643.137 ms
+ConfidenceInterval = [606.277 ms; 627.749 ms] (CI 99.9%), Margin = 10.736 ms (1.74% of Mean)
+Skewness = 0.39, Kurtosis = 2.1, MValue = 2
+-------------------- Histogram --------------------
+[602.013 ms ; 626.100 ms) | @@@@@@@@@@@@
+[626.100 ms ; 639.294 ms) | @@
+---------------------------------------------------
+
+MapImmDictTests.'int - Map find': DefaultJob
+Runtime = .NET 8.0.4 (8.0.424.16909), X64 RyuJIT AVX2; GC = Concurrent Workstation
+Mean = 48.278 ms, StdErr = 0.256 ms (0.53%), N = 28, StdDev = 1.356 ms
+Min = 46.865 ms, Q1 = 47.365 ms, Median = 47.982 ms, Q3 = 48.728 ms, Max = 51.448 ms
+IQR = 1.363 ms, LowerFence = 45.321 ms, UpperFence = 50.772 ms
+ConfidenceInterval = [47.333 ms; 49.224 ms] (CI 99.9%), Margin = 0.945 ms (1.96% of Mean)
+Skewness = 1.16, Kurtosis = 3.22, MValue = 2
+-------------------- Histogram --------------------
+[46.852 ms ; 48.024 ms) | @@@@@@@@@@@@@@@@
+[48.024 ms ; 49.356 ms) | @@@@@@@@
+[49.356 ms ; 50.489 ms) | 
+[50.489 ms ; 51.661 ms) | @@@@
+---------------------------------------------------
+
+MapImmDictTests.'int - ImmutableDictionary find': DefaultJob
+Runtime = .NET 8.0.4 (8.0.424.16909), X64 RyuJIT AVX2; GC = Concurrent Workstation
+Mean = 47.203 ms, StdErr = 0.195 ms (0.41%), N = 14, StdDev = 0.731 ms
+Min = 46.072 ms, Q1 = 46.471 ms, Median = 47.374 ms, Q3 = 47.754 ms, Max = 48.182 ms
+IQR = 1.282 ms, LowerFence = 44.548 ms, UpperFence = 49.677 ms
+ConfidenceInterval = [46.379 ms; 48.028 ms] (CI 99.9%), Margin = 0.825 ms (1.75% of Mean)
+Skewness = -0.23, Kurtosis = 1.39, MValue = 2
+-------------------- Histogram --------------------
+[45.834 ms ; 47.136 ms) | @@@@@
+[47.136 ms ; 48.581 ms) | @@@@@@@@@
+---------------------------------------------------
+
+// * Summary *
+
+BenchmarkDotNet v0.13.12, Ubuntu 22.04.4 LTS (Jammy Jellyfish)
+12th Gen Intel Core i7-12800H, 1 CPU, 20 logical and 14 physical cores
+.NET SDK 8.0.204
+  [Host]     : .NET 8.0.4 (8.0.424.16909), X64 RyuJIT AVX2 DEBUG
+  DefaultJob : .NET 8.0.4 (8.0.424.16909), X64 RyuJIT AVX2
+
+
+| Method                                  | Mean      | Error     | StdDev   | Gen0       | Gen1      | Gen2     | Allocated    |
+|---------------------------------------- |----------:|----------:|---------:|-----------:|----------:|---------:|-------------:|
+| 'int - Map ofSeq'                       | 437.00 ms |  2.820 ms | 2.202 ms | 82000.0000 | 8000.0000 |        - | 1029666592 B |
+| 'int - ImmutableDictionary CreateRange' | 275.40 ms |  3.712 ms | 3.290 ms |  7500.0000 | 7000.0000 | 500.0000 |   88001012 B |
+| 'int - FrozenDictionary CreateRange'    | 100.81 ms |  1.995 ms | 5.004 ms |  3333.3333 | 3166.6667 | 833.3333 |  117963543 B |
+| 'int - Map add'                         | 387.72 ms |  3.735 ms | 3.119 ms | 80000.0000 | 6000.0000 |        - | 1013666304 B |
+| 'int - ImmutableDictionary add'         | 617.01 ms | 10.736 ms | 9.517 ms | 92000.0000 | 9000.0000 |        - | 1157280536 B |
+| 'int - Map find'                        |  48.28 ms |  0.945 ms | 1.356 ms |          - |         - |        - |         74 B |
+| 'int - ImmutableDictionary find'        |  47.20 ms |  0.825 ms | 0.731 ms |          - |         - |        - |         61 B |
+
+// * Hints *
+Outliers
+  MapImmDictTests.'int - Map ofSeq': Default                       -> 3 outliers were removed (452.84 ms..456.82 ms)
+  MapImmDictTests.'int - ImmutableDictionary CreateRange': Default -> 1 outlier  was  removed (302.15 ms)
+  MapImmDictTests.'int - FrozenDictionary CreateRange': Default    -> 1 outlier  was  detected (87.56 ms)
+  MapImmDictTests.'int - Map add': Default                         -> 2 outliers were removed (405.54 ms, 437.01 ms)
+  MapImmDictTests.'int - ImmutableDictionary add': Default         -> 1 outlier  was  removed (653.95 ms)
+  MapImmDictTests.'int - Map find': Default                        -> 3 outliers were removed (52.15 ms..57.44 ms)
+  MapImmDictTests.'int - ImmutableDictionary find': Default        -> 1 outlier  was  removed (54.03 ms)
+
+// * Legends *
+  Mean      : Arithmetic mean of all measurements
+  Error     : Half of 99.9% confidence interval
+  StdDev    : Standard deviation of all measurements
+  Gen0      : GC Generation 0 collects per 1000 operations
+  Gen1      : GC Generation 1 collects per 1000 operations
+  Gen2      : GC Generation 2 collects per 1000 operations
+  Allocated : Allocated memory per single operation (managed only, inclusive, 1KB = 1024B)
+  1 ms      : 1 Millisecond (0.001 sec)
+
+// * Diagnostic Output - MemoryDiagnoser *
+
+
+// ***** BenchmarkRunner: End *****
+Run time: 00:03:05 (185.21 sec), executed benchmarks: 7
+
+Global total time: 00:03:09 (189.26 sec), executed benchmarks: 7
+// * Artifacts cleanup *
+Artifacts cleanup is finished
