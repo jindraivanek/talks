@@ -65,7 +65,7 @@ MYTH: to create new immutable value, you need to copy the whole thing
 ---
 
 
-## (Linked) list
+# (Linked) list
 
 ```fsharp
 let listA = [1; 2; 3]
@@ -109,7 +109,7 @@ let s = [11; 20; 29; 32; 41; 50; 65; 72; 91; 99] |> set
 
 ---
 
-Insert = search + add
+## Insert = search + add
 
 ```fsharp
 let s2 = s |> Set.add 35
@@ -121,7 +121,7 @@ from https://visualgo.net/en/bst
 
 ---
 
-Building new Set
+## Building new Set
 
 ```fsharp
 let s = [1; 7; 3; 9; 5; 6; 2; 8; 4] |> set
@@ -141,7 +141,7 @@ TODO image
 
 ---
 
-Map sharing
+## Map sharing
 
 ```fsharp
 let mapA = Map.ofList [1, "A"; 2, "B"; 3, "C"]
@@ -152,7 +152,7 @@ mapB = mapB2 // true
 
 ---
 
-## Records
+# Records
 
 ```fsharp
 { Id: int; Name: string }
@@ -168,7 +168,7 @@ mapB = mapB2 // true
 
 ---
 
-# Structural comparison
+# Structural comparison in .NET
 
 - definition of equality based on values, not references
 - all F# data types have defined structural comparison and ordering
@@ -185,3 +185,6 @@ mapB = mapB2 // true
 layout: thank-you
 ---
 
+# Thank you!
+
+---
