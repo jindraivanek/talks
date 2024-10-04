@@ -1,5 +1,5 @@
 ---
-title: 'Ciklum presentation'
+title: 'Immutable Data Structures'
 layout: intro
 background: ''
 # Presentation Setup (for all option see: https://sli.dev/custom/#frontmatter-configures)
@@ -24,7 +24,7 @@ xx.yy.2024
 ::description::
 <!-- <div class="pb-6">Everything you need to know about, ....</div> -->
 <div>Jindřich Ivánek</div>
-<div>F# Developer at Ciklum</div>
+<div>F# Expert at Ciklum</div>
 
 ---
 
@@ -37,6 +37,7 @@ xx.yy.2024
 ---
 
 # Immutable Data Structures
+## Definition
 * no part of object can be changed after it's created
 
 ## Why?
@@ -44,7 +45,7 @@ xx.yy.2024
 * immutable data structures are easier to reason about
   - value passed to a function, can't be changed
 * immutable data structures are thread-safe
-* bonus: memory efficient time traveling
+* bonus: memory efficient time travelling
 
 ---
 
@@ -90,9 +91,13 @@ let listB2 = [4] @ listA
 
 ---
 
-
-
 ![bg](img/terminusdb-commit-graph-diagram-regtech-1536x864.png)
+
+---
+
+# List Benchmark
+
+TODO
 
 ---
 
@@ -117,7 +122,19 @@ let s2 = s |> Set.add 35
 
 ![tree insert](img/tree-insert.gif)
 
-from https://visualgo.net/en/bst
+
+<font color="grey"> <p align="right">source: https://visualgo.net/en/bst</p></font>
+
+
+---
+
+## Insert - structural sharing
+
+```fsharp
+let s2 = s |> Set.add 35
+```
+
+![tree sharing](img/set_after_insert.png)
 
 ---
 
@@ -129,7 +146,13 @@ let s = [1; 7; 3; 9; 5; 6; 2; 8; 4] |> set
 
 ![bg contain](img/tree-inserts.gif)
 
-from https://visualgo.net/en/bst
+<font color="grey"> <p align="right">source: https://visualgo.net/en/bst</p></font>
+
+---
+
+Set Benchmark
+
+TODO
 
 ---
 
@@ -152,6 +175,12 @@ mapB = mapB2 // true
 
 ---
 
+# Map Benchmark
+
+TODO
+
+---
+
 # Records
 
 ```fsharp
@@ -166,16 +195,16 @@ mapB = mapB2 // true
     ```
   - only reference is copied (except for *structs*)
 
+  TODO image?
+
 ---
 
 # Structural comparison in .NET
 
 - definition of equality based on values, not references
 - all F# data types have defined structural comparison and ordering
-- only few C# (compound) types have defined structural comparison and ordering
-  - Tuples, Records, Array, ImmutableArray
 - Immutability and structural comparison are different features, but it is common that immutable data structures have defined structural comparison
-  - same value with different references are more common when working with immutable data structures
+  - same value with different references is more common when working with immutable data structures
 
 ---
 
