@@ -1,7 +1,7 @@
 ---
 title: 'Immutable Data Structures'
 layout: intro
-background: ''
+background: 'img/intro-immutable-tree.png'
 # Presentation Setup (for all option see: https://sli.dev/custom/#frontmatter-configures)
 theme: ./theme
 class: 'text-center'
@@ -16,7 +16,7 @@ routerMode: hash # more compatible with static site hosting
 ---
 
 ::date::
-xx.yy.2024
+DevTalks 18.10.2024
 
 ::title::
 # Immutable Data Structures
@@ -26,32 +26,35 @@ xx.yy.2024
 <div>Jindřich Ivánek</div>
 <div>F# Expert at Ciklum</div>
 
----
-
-# Immutable Data Structures
-   - why, how, structural sharing
-   - Linked list (F# list)
-   - Tree (F# Set, Map)
-   - tuples, records, classes
+<!--
+Note
+-->
 
 ---
 
 # Immutable Data Structures
+
 ## Definition
 * no part of object can be changed after it's created
 
-## Why?
-* mutation is common source of bugs
-* immutable data structures are easier to reason about
+## Why use them?
+
+<v-clicks>
+
+- mutation is common source of bugs
+- immutable data structures are easier to reason about
   - value passed to a function, can't be changed
-* immutable data structures are thread-safe
-* bonus: memory efficient time travelling
+- immutable data structures are **thread-safe**
+- bonus: memory efficient time travelling
+
+</v-clicks>
 
 ---
 
-MYTH: to create new immutable value, you need to copy the whole thing
+# Immutable update
+MYTH: to "change" immutable value, you need to copy the whole thing
 
-<Transform :scale="0.8">
+<Transform :scale="0.7">
 <img src ="img/meme.jpg"/>
 </Transform>
 
