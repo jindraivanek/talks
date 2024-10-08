@@ -22,8 +22,7 @@ DevTalks 18.10.2024
 # Immutable Data Structures
 
 ::description::
-<!-- <div class="pb-6">Everything you need to know about, ....</div> -->
-<div>Jindřich Ivánek</div>
+<div><strong>Jindřich Ivánek</strong></div>
 <div>F# Expert at Ciklum</div>
 
 <!--
@@ -32,7 +31,7 @@ Note
 
 ---
 
-# Immutable Data Structures
+# Immutable Data
 
 ## Definition
 * no part of object can be changed after it's created
@@ -42,12 +41,22 @@ Note
 <v-clicks>
 
 - mutation is common source of bugs
-- immutable data structures are easier to reason about
+- immutable data are easier to reason about
   - value passed to a function, can't be changed
 - immutable data structures are **thread-safe**
 - bonus: memory efficient time travelling
 
 </v-clicks>
+
+<!--
+What's Immutable data? One of definitions is that no part of the object cannot be changed after it's creation. That gives us many advantages.
+
+Mutation is common source of bugs.
+
+Immutable data are easier to reason about. Value passed to a function can't be changed - big part of uncertainty disappear.
+
+
+-->
 
 ---
 
