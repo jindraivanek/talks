@@ -188,7 +188,29 @@ Typically implemented as a (balanced) tree
 let s = [11; 20; 29; 32; 41; 50; 65; 72; 91; 99] |> set
 ```
 
-![Example tree](img/set1.png)
+```mermaid
+graph TD
+41(("41"))
+20(("20"))
+11(("11"))
+29(("29"))
+32(("32"))
+65(("65"))
+50(("50"))
+91(("91"))
+72(("72"))
+99(("99"))
+
+41 --> 20
+41 --> 65
+20 --> 11
+20 --> 29
+29 --> 32
+65 --> 50
+65 --> 91
+91 --> 72
+91 --> 99
+```
 
 <!--
 
@@ -269,18 +291,119 @@ TODO
 * Dictionary like immutable data structure
 * Like `Set`, but with value linked with each key (node)
 
-TODO image
+```mermaid
+graph TD
+41["41"]
+20["20"]
+11["11"]
+29["29"]
+32["32"]
+65["65"]
+50["50"]
+91["91"]
+72["72"]
+99["99"]
 
+41 --> 20
+41 --> 65
+20 --> 11
+20 --> 29
+29 --> 32
+65 --> 50
+65 --> 91
+91 --> 72
+91 --> 99
+subgraph values
+A
+B
+C
+D
+E
+F
+G
+H
+I
+J
+end
+
+11 --- A
+20 --- B
+29 --- C
+32 --- D
+41 --- E
+50 --- F
+65 --- G
+72 --- H
+91 --- I
+99 --- J
+
+```
 ---
 
 ## Map sharing
 
 ```fsharp
-let mapA = Map.ofList [1, "A"; 2, "B"; 3, "C"]
-let mapB = Map.ofList [1, "A"; 2, "B"; 3, "C"; 4, "D"]
-let mapB2 = Map.add 4 "D" mapA
-mapB = mapB2 // true
+let mapA = Map.ofList [1, "A"; 2, "B"; 3, "C"; 4, "D"; 5, "E"; 6, "F"; 7, "G"]
+let mapB = Map.add 8 "H" mapA
 ```
+<Transform :scale="0.7">
+
+```mermaid
+graph TD
+subgraph smapA["mapA"]
+mapA("mapA") --> 4
+1(("1"))
+2(("2"))
+3(("3"))
+4(("4"))
+5(("5"))
+6(("6"))
+7(("7"))
+2 --> 1
+2 --> 3
+4 --> 2
+4 --> 6
+6 --> 5
+6 --> 7
+end
+subgraph smapB["mapB"]
+4b(("4"))
+6b(("6"))
+7b(("7"))
+8b(("8"))
+4b --> 2
+4b --> 6b
+6b --> 5
+6b --> 7b
+7b --> 8b
+mapB("mapB") --> 4b
+end
+
+subgraph values
+A
+B
+C
+D
+E
+F
+G
+H
+end
+
+1 --- A
+2 --- B
+3 --- C
+4 --- D
+5 --- E
+6 --- F
+7 --- G
+4b --- D
+6b --- F
+7b --- G
+8b --- H
+```
+
+</Transform>
 
 ---
 
