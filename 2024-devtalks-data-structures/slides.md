@@ -190,6 +190,18 @@ let s = [11; 20; 29; 32; 41; 50; 65; 72; 91; 99] |> set
 
 ![Example tree](img/set1.png)
 
+<!--
+
+Dictionary or Map are important data structure. We start by Set, Map is based on it.
+
+Set is a structure that represent collection of unique items. It can answer if it contains some item. Duplicates are ignored. There is no ordering guarantee.
+
+To enable structural sharing, we represent Set as tree. Unchanged subtrees are shared across instances.
+
+The Set is typically represented as balanced binary tree (AVL tree).
+
+-->
+
 ---
 
 ## Insert = search + add
@@ -203,6 +215,12 @@ let s2 = s |> Set.add 35
 
 <font color="grey"> <p align="right">source: https://visualgo.net/en/bst</p></font>
 
+<!--
+
+To insert item to Set, we try to search for it in tree. If item is not found, we add it to tree to proper location. Then the tree is re-balanced.
+
+-->
+
 
 ---
 
@@ -213,6 +231,13 @@ let s2 = s |> Set.add 35
 ```
 
 ![tree sharing](img/set_after_insert.png)
+
+<!--
+
+All unchanged part of the tree is shared. Sharing is done on subtree level. When subtree is not changed , reference ti it remains the same and it is shared between old and new instance.
+
+-->
+
 
 ---
 
@@ -225,6 +250,12 @@ let s = [1; 7; 3; 9; 5; 6; 2; 8; 4] |> set
 ![bg contain](img/tree-inserts.gif)
 
 <font color="grey"> <p align="right">source: https://visualgo.net/en/bst</p></font>
+
+<!--
+
+Let's see how building new Set by inserting items one-by-one looks like.
+
+-->
 
 ---
 
@@ -271,7 +302,7 @@ TODO
   - ```fsharp
     { oldRecord with Name = "Bob" }
     ```
-  - only reference is copied (except for *structs*)
+  - only reference is copied
 
   TODO image?
 
