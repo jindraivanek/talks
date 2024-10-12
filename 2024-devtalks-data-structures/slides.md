@@ -291,8 +291,11 @@ TODO
 * Dictionary like immutable data structure
 * Like `Set`, but with value linked with each key (node)
 
+<Transform :scale="0.7">
+
 ```mermaid
 graph TD
+classDef cluster fill:#efefea
 41["41"]
 20["20"]
 11["11"]
@@ -336,8 +339,9 @@ end
 72 --- H
 91 --- I
 99 --- J
-
 ```
+
+</Transform>
 ---
 
 ## Map sharing
@@ -350,6 +354,7 @@ let mapB = Map.add 8 "H" mapA
 
 ```mermaid
 graph TD
+classDef cluster fill:#efefea
 subgraph smapA["mapA"]
 mapA("mapA") --> 4
 1(("1"))
@@ -365,6 +370,22 @@ mapA("mapA") --> 4
 4 --> 6
 6 --> 5
 6 --> 7
+subgraph values
+A
+B
+C
+D
+E
+F
+G
+end
+1 --- A
+2 --- B
+3 --- C
+4 --- D
+5 --- E
+6 --- F
+7 --- G
 end
 subgraph smapB["mapB"]
 4b(("4"))
@@ -377,26 +398,11 @@ subgraph smapB["mapB"]
 6b --> 7b
 7b --> 8b
 mapB("mapB") --> 4b
-end
-
-subgraph values
-A
-B
-C
-D
-E
-F
-G
+subgraph values-MapB
 H
 end
+end
 
-1 --- A
-2 --- B
-3 --- C
-4 --- D
-5 --- E
-6 --- F
-7 --- G
 4b --- D
 6b --- F
 7b --- G
