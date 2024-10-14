@@ -252,14 +252,42 @@ To insert item to Set, we try to search for it in tree. If item is not found, we
 let s2 = s |> Set.add 35
 ```
 
-![tree sharing](img/set_after_insert.png)
+```mermaid
+graph TD
+41(("41"))
+20(("20"))
+11(("11"))
+29(("29"))
+32(("32"))
+65(("65"))
+50(("50"))
+91(("91"))
+72(("72"))
+99(("99"))
+35(("35"))
+
+41 --> 20
+41 --> 65
+20 --> 11
+20 --> 32
+32 --> 29
+32 --> 35
+65 --> 50
+65 --> 91
+91 --> 72
+91 --> 99
+
+style 41 fill: orange
+style 20 fill: orange
+style 32 fill: orange
+style 35 fill: red
+```
 
 <!--
 
 All unchanged part of the tree is shared. Sharing is done on subtree level. When subtree is not changed , reference ti it remains the same and it is shared between old and new instance.
 
 -->
-
 
 ---
 
@@ -355,8 +383,6 @@ let mapB = Map.add 8 "H" mapA
 ```mermaid
 graph TD
 classDef cluster fill:#efefea
-subgraph smapA["mapA"]
-mapA("mapA") --> 4
 1(("1"))
 2(("2"))
 3(("3"))
@@ -378,6 +404,7 @@ D
 E
 F
 G
+H
 end
 1 --- A
 2 --- B
@@ -386,30 +413,26 @@ end
 5 --- E
 6 --- F
 7 --- G
-end
-subgraph smapB["mapB"]
-4b(("4"))
-6b(("6"))
-7b(("7"))
-8b(("8"))
-4b --> 2
-4b --> 6b
-6b --> 5
-6b --> 7b
-7b --> 8b
-mapB("mapB") --> 4b
-subgraph values-MapB
-H
-end
-end
 
-4b --- D
-6b --- F
-7b --- G
+8b(("8"))
+7 --> 8b
 8b --- H
+
+style 4 fill: orange
+style 6 fill: orange
+style 7 fill: orange
+style 8b fill: red
+style H fill: red
+
 ```
 
 </Transform>
+
+<!--
+
+Values are linked to keys through references. That means that even if we changing keys, the (possibly big) values are shared.
+
+-->
 
 ---
 
