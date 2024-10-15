@@ -357,16 +357,16 @@ I
 J
 end
 
-11 --- A
-20 --- B
-29 --- C
-32 --- D
-41 --- E
-50 --- F
-65 --- G
-72 --- H
-91 --- I
-99 --- J
+11 -.- A
+20 -.- B
+29 -.- C
+32 -.- D
+41 -.- E
+50 -.- F
+65 -.- G
+72 -.- H
+91 -.- I
+99 -.- J
 ```
 
 </Transform>
@@ -375,27 +375,42 @@ end
 ## Map sharing
 
 ```fsharp
-let mapA = Map.ofList [1, "A"; 2, "B"; 3, "C"; 4, "D"; 5, "E"; 6, "F"; 7, "G"]
-let mapB = Map.add 8 "H" mapA
+let mapA = Map.ofList [11, "A"; 20, "B"; 29, "C"; 32, "D"; 41, "E"; 50, "F"; 65, "G", 72, "H"; 91, "I"; 99, "J"]
+let mapB = Map.add 35 "K" mapA
 ```
 <Transform :scale="0.7">
 
 ```mermaid
 graph TD
 classDef cluster fill:#efefea
-1(("1"))
-2(("2"))
-3(("3"))
-4(("4"))
-5(("5"))
-6(("6"))
-7(("7"))
-2 --> 1
-2 --> 3
-4 --> 2
-4 --> 6
-6 --> 5
-6 --> 7
+41(("41"))
+20(("20"))
+11(("11"))
+29(("29"))
+32(("32"))
+65(("65"))
+50(("50"))
+91(("91"))
+72(("72"))
+99(("99"))
+35(("35"))
+
+41 --> 20
+41 --> 65
+20 --> 11
+20 --> 32
+32 --> 29
+32 --> 35
+65 --> 50
+65 --> 91
+91 --> 72
+91 --> 99
+
+style 41 fill: orange
+style 20 fill: orange
+style 32 fill: orange
+style 35 fill: red
+
 subgraph values
 A
 B
@@ -405,24 +420,22 @@ E
 F
 G
 H
+I
+J
+K
 end
-1 --- A
-2 --- B
-3 --- C
-4 --- D
-5 --- E
-6 --- F
-7 --- G
 
-8b(("8"))
-7 --> 8b
-8b --- H
-
-style 4 fill: orange
-style 6 fill: orange
-style 7 fill: orange
-style 8b fill: red
-style H fill: red
+11 -.- A
+20 -.- B
+29 -.- C
+32 -.- D
+41 -.- E
+50 -.- F
+65 -.- G
+72 -.- H
+91 -.- I
+99 -.- J
+35 -.- K
 
 ```
 
@@ -445,7 +458,7 @@ TODO
 # Records
 
 ```fsharp
-{ Id: int; Name: string }
+{ Id: int; Name: string; Data: BigObject }
 ```
 
 - Immutable by default
@@ -455,8 +468,7 @@ TODO
     { oldRecord with Name = "Bob" }
     ```
   - only reference is copied
-
-  TODO image?
+  - Data is shared
 
 ---
 
@@ -467,9 +479,6 @@ TODO
 - Immutability and structural comparison are different features, but it is common that immutable data structures have defined structural comparison
   - same value with different references is more common when working with immutable data structures
 
----
-
-# Questions?
 
 ---
 layout: thank-you
@@ -477,4 +486,3 @@ layout: thank-you
 
 # Thank you!
 
----
