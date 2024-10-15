@@ -24,6 +24,7 @@ DevTalks 18.10.2024
 ::description::
 <div><strong>Jindřich Ivánek</strong></div>
 <div>F# Expert at Ciklum</div>
+<div><a href="jindraivanek.hashnode.dev">jindraivanek.hashnode.dev</a></div>
 
 <!--
 Note

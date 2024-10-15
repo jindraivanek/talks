@@ -42,11 +42,32 @@ type ListListTests() =
         let x = csList.Sum(fun x -> int64 x.Id)
         x
 
+[<MemoryDiagnoser>]
+type SetSetTests() =
+    [<Params(100, 1000, 10000, 100000)>]
+    member val size = 100000 with get, set
+    member this.Collection = seq { 1..this.size } |> Seq.map (fun i -> { Id = i; Name = i.ToString() }) 
+    
+    [<Benchmark(Description = "F# Set workload")>]
+    member this.SetWorkload() =
+        let s =
+          this.Collection |> set
+          //|> Set.filter (fun x -> x.Id % 2 = 0)
+        this.Collection |> Seq.iter (fun x -> Set.contains x s |> ignore)
+
+    [<Benchmark(Baseline = true, Description = "C# Set Workload")>]
+    member this.HashSetWorkload() =
+        let s = this.Collection.ToHashSet()
+        //s.RemoveWhere(fun x -> x.Id % 2 <> 0)
+        for i in this.Collection do s.Contains(i)
+        
+
 let run() =
   let X = ListListTests()
   //for _ = 1 to 100 do X.CsListWorkload()
   assert (X.ListWorkload() = X.CsListWorkload())
 
-BenchmarkRunner.Run<ListListTests>()
+//BenchmarkRunner.Run<ListListTests>()
+BenchmarkRunner.Run<SetSetTests>()
 
 
