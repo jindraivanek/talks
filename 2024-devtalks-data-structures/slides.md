@@ -172,10 +172,56 @@ Git in principle is just linked list (with few more features) and branches are j
 -->
 
 ---
+layout: two-columns
+---
+::left::
 
 # List Benchmark
 
-TODO
+```fsharp
+member this.FsListWorkload() =
+    this.listOfRecords
+    |> List.map (fun x -> { x with Id = x.Id + 1})
+    |> List.filter (fun x -> x.Id % 2 = 0)
+    |> List.map (fun x -> int64 x.Id)
+    |> List.sum
+
+member this.CsListWorkload() =
+    let csList = this.csList
+    for i=0 to csList.Count - 1 do
+        csList.[i] <- 
+          { csList.[i] with Id = csList.[i].Id + 1 }
+    csList.RemoveAll(fun x -> x.Id % 2 <> 0)
+    let x = csList.Sum(fun x -> int64 x.Id)
+    x
+```
+
+::right::
+
+FsListWorkload compared to CsListWorkload
+
+<Transform :scale="0.7">
+
+| size   | Ratio | Alloc Ratio |
+|------- |------:|------------:|
+| 100    |  1.41 |        2.54 |
+| 1000   |  1.51 |        2.26 |
+| 10000  |  1.61 |        2.16 |
+| 100000 |  1.37 |        2.15 |
+
+</Transform>
+
+---
+
+# Notes on Benchmarks
+<v-clicks>
+
+- hard and time expensive to write correct benchmarks
+- there are always ways to make them faster
+- at best they are only indicative
+- all benchmarks are wrong
+
+</v-clicks>
 
 ---
 
