@@ -234,6 +234,12 @@ FsListWorkload compared to CsListWorkload
 
 </Transform>
 
+<!--
+For benchmark, we create list of given size, filter out half of items and then sum all items.
+
+We can see that immutable list is slower, but not much.
+-->
+
 ---
 
 # Notes on Benchmarks
@@ -251,7 +257,7 @@ FsListWorkload compared to CsListWorkload
 # Set
 Unordered set of values
 
-Typically implemented as a (balanced) tree
+Typically implemented as a balanced tree (AVL)
 
 ```fsharp
 let s = [11; 20; 29; 32; 41; 50; 65; 72; 91; 99] |> set
@@ -395,6 +401,12 @@ Immutable `Set` / mutable `HashSet`
 | 'contains'          | 100000 |       0.92 |         1.00 |
 
 </Transform>
+
+<!--
+
+Immutable Set is on par with mutable HashSet for contains operation. It's slower for creation. That's because of need to rebalancing tree during inserts.
+
+-->
 
 ---
 
