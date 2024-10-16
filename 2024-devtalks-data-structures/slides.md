@@ -65,7 +65,29 @@ As a bonus we got the ability to store history of changes in memory efficient wa
 
 ---
 
-TODO example?
+# Why immutability - example
+
+<v-clicks>
+
+```csharp {2|5|3-6|all}
+public class Account {
+    public decimal Money { get; set; } // mutable data
+    public void Pay(decimal amount) // race condition
+    {
+        Money -= amount; // change of value, no rollback, history
+    }
+}
+```
+
+<!-- <arrow v-click="[4, 5]" x1="350" y1="310" x2="195" y2="334" color="var(--ciklum-color-blue)" width="2" arrowSize="1" /> -->
+
+```fsharp
+type Account = { Money: decimal } // immutable data
+
+let pay (account: Account) amount = { account with Money = account.Money - amount }
+```
+
+</v-clicks>
 
 ---
 
@@ -203,12 +225,12 @@ FsListWorkload compared to CsListWorkload
 
 <Transform :scale="0.7">
 
-| size   | Ratio | Alloc Ratio |
-|------- |------:|------------:|
-| 100    |  1.41 |        2.54 |
-| 1000   |  1.51 |        2.26 |
-| 10000  |  1.61 |        2.16 |
-| 100000 |  1.37 |        2.15 |
+| size   | Time Ratio | Memory Ratio |
+| ------ | ---------: | -----------: |
+| 100    |       1.41 |         2.54 |
+| 1000   |       1.51 |         2.26 |
+| 10000  |       1.61 |         2.16 |
+| 100000 |       1.37 |         2.15 |
 
 </Transform>
 
@@ -327,7 +349,7 @@ graph TD
 style 41 fill: orange
 style 20 fill: orange
 style 32 fill: orange
-style 35 fill: red
+style 35 fill: green
 ```
 
 <!--
@@ -356,9 +378,23 @@ Let's see how building new Set by inserting items one-by-one looks like.
 
 ---
 
-Set Benchmark
+# Set Benchmark
+Immutable `Set` / mutable `HashSet`
 
-TODO
+<Transform :scale="0.7">
+
+| Method              | size   | Time Ratio | Memory Ratio |
+| ------------------- | ------ | ---------: | -----------: |
+| 'create + contains' | 100    |       3.52 |         1.46 |
+| 'create + contains' | 1000   |       4.32 |         1.82 |
+| 'create + contains' | 10000  |       4.28 |         2.23 |
+| 'create + contains' | 100000 |       3.02 |         2.72 |
+| 'contains'          | 100    |       0.97 |         1.01 |
+| 'contains'          | 1000   |       1.09 |         1.00 |
+| 'contains'          | 10000  |       1.09 |         1.00 |
+| 'contains'          | 100000 |       0.92 |         1.00 |
+
+</Transform>
 
 ---
 
@@ -499,7 +535,17 @@ Values are linked to keys through references. That means that even if we changin
 
 # Map Benchmark
 
-TODO
+| Method                 | size   | Time Ratio | Memory Ratio |
+| ---------------------- | ------ | ---------: | ------: |
+| 'containsKey'          | 100    |       1.08 |    1.01 |
+| 'containsKey'          | 1000   |       0.85 |    1.00 |
+| 'containsKey'          | 10000  |       1.07 |    1.00 |
+| 'containsKey'          | 100000 |       0.99 |    1.00 |
+| 'create + containsKey' | 100    |       2.07 |    1.92 |
+| 'create + containsKey' | 1000   |       2.98 |    2.21 |
+| 'create + containsKey' | 10000  |       1.79 |    2.61 |
+| 'create + containsKey' | 100000 |       2.19 |    3.13 |
+
 
 ---
 
@@ -533,4 +579,3 @@ layout: thank-you
 ---
 
 # Thank you!
-
