@@ -69,7 +69,8 @@ As a bonus we got the ability to store history of changes in memory efficient wa
 
 <v-clicks>
 
-```csharp {2|5|3-6|all}
+### Mutable
+```csharp {2|5|3-6|8-9|all}
 public class Account {
     public decimal Money { get; set; } // mutable data
     public void Pay(decimal amount) // race condition
@@ -77,14 +78,20 @@ public class Account {
         Money -= amount; // change of value, no rollback, history
     }
 }
+var account = new Account { Money = 1000 };
+System.Threading.Tasks.Parallel.For(0, 10, _ => account.Pay(100)); // anything between 0 - 900
 ```
 
 <!-- <arrow v-click="[4, 5]" x1="350" y1="310" x2="195" y2="334" color="var(--ciklum-color-blue)" width="2" arrowSize="1" /> -->
 
-```fsharp
+### Immutable
+```fsharp {1-2|4-6|all}
 type Account = { Money: decimal } // immutable data
-
 let pay (account: Account) amount = { account with Money = account.Money - amount }
+
+let account = { Money = 1000 }
+[ 0 .. 10 ] |> List.map (fun i -> async { return pay account 100 }) 
+|> Async.Parallel |> Async.RunSynchronously // 900 for all results
 ```
 
 </v-clicks>
